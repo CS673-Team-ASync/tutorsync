@@ -1,0 +1,18 @@
+{
+  "available": [
+    {
+      "id": 1,
+      "title": "json-server",
+      
+      "author": "typicode",
+      "date": "2021-05-10T17:09:00.053Z"
+    },
+    {
+      "id": 2,
+      "title": "json-server",
+      
+      "author": "typicode",
+      "date": "2021-05-10T17:09:00.053Z"
+    }
+  ]
+}
