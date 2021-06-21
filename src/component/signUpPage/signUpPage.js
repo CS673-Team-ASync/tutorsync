@@ -8,6 +8,12 @@ const SignUpPage = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
+    const handleOnSubmit = () => {
+        console.log('submitting...')
+    }
+
+
+
     return <>
         <h1>Create Your Account</h1>
         <form>
