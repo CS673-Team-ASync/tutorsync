@@ -4,6 +4,10 @@
 	font-family: "Roboto", sans-serif;
 }
 
+body {
+	margin: 0;
+}
+
 .twoListContainer {
 	border-radius: 5px;
 	display: flex;

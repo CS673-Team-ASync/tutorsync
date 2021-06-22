@@ -6,6 +6,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import NavigationBar from './component/navigationBar';
 
 const App = () => {
 
@@ -17,6 +18,7 @@ const App = () => {
 
   return (
     <Router>
+      <NavigationBar />
       <Switch>
         <Route path="/signUp">
           <SignUpPage />
