@@ -1,5 +1,6 @@
 import './App.css';
 import ManageTutorTimes from './component/ManageTutorTimes';
+import ManageMeetings from './component/ManageMeetings/ManageMeetings';
 import SignUpPage from './component/signUpPage/signUpPage';
 import {
   BrowserRouter as Router,
@@ -23,8 +24,14 @@ const App = () => {
         <Route path="/signUp">
           <SignUpPage />
         </Route>
+        <Route path="/manageMeetings">
+          <ManageMeetings />
+        </Route>
         <Route path="/">
-          <div className="App">
+        <ManageMeetings />
+        </Route>
+        <Route path="/manageTutorTimes">
+        <div className="App">
             <ManageTutorTimes userId={userId} serverError={serverError} />
           </div>
         </Route>
