@@ -31,10 +31,7 @@ const App = () => {
         <Route path="/signUp">
           <SignUpPage />
         </Route>
-        <Route path="/manageMeetings">
-          <ManageMeetings />
-        </Route>
-        <Route path="/">
+        <Route path="/ManageMeetings">
           <ManageMeetings />
         </Route>
         <Route path="/manageTutorTimes">
