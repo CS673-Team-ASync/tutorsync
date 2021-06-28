@@ -5,7 +5,7 @@ const ManageMeetings = () => {
 
   
     return <div>
-        <br></br><br></br><br></br><br></br><br></br><br></br><h1>MaangetMeetings</h1>
+        <h1>ManageMeetings</h1>
     </div>
 }
 

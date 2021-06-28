@@ -1,7 +1,14 @@
 import './App.css';
+//Colum
 import ManageTutorTimes from './component/ManageTutorTimes';
+
+//Luke
 import ManageMeetings from './component/ManageMeetings/ManageMeetings';
+
+//Rick
 import SignUpPage from './component/signUpPage/signUpPage';
+
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -28,7 +35,7 @@ const App = () => {
           <ManageMeetings />
         </Route>
         <Route path="/">
-        <ManageMeetings />
+          <ManageMeetings />
         </Route>
         <Route path="/manageTutorTimes">
         <div className="App">
