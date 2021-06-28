@@ -8,6 +8,8 @@ import ManageMeetings from './component/ManageMeetings/ManageMeetings';
 //Rick
 import SignUpPage from './component/signUpPage/signUpPage';
 
+//Yi-Chun
+import SearchPage from './component/SearchPage/SearchPage';
 
 import {
   BrowserRouter as Router,
@@ -33,6 +35,9 @@ const App = () => {
         </Route>
         <Route path="/ManageMeetings">
           <ManageMeetings />
+        </Route>
+        <Route path="/SearchPage">
+          <SearchPage/>
         </Route>
         <Route path="/manageTutorTimes">
         <div className="App">
