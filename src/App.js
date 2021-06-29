@@ -34,19 +34,11 @@ const App = () => {
         <Route path="/signUp">
           <SignUpPage />
         </Route>
-<<<<<<< Updated upstream
-        <Route path="/ManageMeetings">
-          <ManageMeetings />
-        </Route>
-        <Route path="/SearchPage">
-          <SearchPage/>
-=======
         <Route path="/Meeting">
           <Meeting />
         </Route>
         <Route path="/">
           <Meeting />
->>>>>>> Stashed changes
         </Route>
         <Route path="/manageTutorTimes">
         <div className="App">
