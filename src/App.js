@@ -1,9 +1,10 @@
 import './App.css';
+// import 'react-bootstrap/dist/css/bootstrap.min.css';
 //Colum
 import ManageTutorTimes from './component/ManageTutorTimes';
 
 //Luke
-import ManageMeetings from './component/ManageMeetings/ManageMeetings';
+import Meeting from './component/Meeting/meeting';
 
 //Rick
 import SignUpPage from './component/signUpPage/signUpPage';
@@ -33,11 +34,19 @@ const App = () => {
         <Route path="/signUp">
           <SignUpPage />
         </Route>
+<<<<<<< Updated upstream
         <Route path="/ManageMeetings">
           <ManageMeetings />
         </Route>
         <Route path="/SearchPage">
           <SearchPage/>
+=======
+        <Route path="/Meeting">
+          <Meeting />
+        </Route>
+        <Route path="/">
+          <Meeting />
+>>>>>>> Stashed changes
         </Route>
         <Route path="/manageTutorTimes">
         <div className="App">
