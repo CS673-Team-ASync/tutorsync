@@ -4,7 +4,6 @@ import "./SearchPage.css";
 const SearchPage = () => {
 
     return <div>
-        <body>
             <div className = "search1">
                 <h1>
                 Search for Tutors
@@ -13,9 +12,10 @@ const SearchPage = () => {
                 Not available right now
                 </div>
 
+                
                 <div className = "search2">
                     <p>
-                    <label class="title" for="tutor-search">Search for Tutor</label>
+                    <label for="tutor-search">Search for Tutor</label>
                     </p>
                     <input type= "text" id="name" name="name" aria-label="Search through site content"></input>
       
@@ -24,18 +24,18 @@ const SearchPage = () => {
                     </p>
                     <input type= "text" id="subject" name="subject" aria-label="Search through site content"></input>
 
-                    <h3>
+                    <p>
                     Availability (days)
-                    <ul>
-                    <li className ="search4">1-7</li>
-                    <li className ="search4">1-14</li>
-                    <li className ="search4">1-28</li>
-                    </ul>
-                    </h3>
+                    </p>
+                    
+                    <li className ="search4">1 - 7</li>
+                    <li className ="search4">1 - 14</li>
+                    <li className ="search4">1 - 28</li>
+                    
+                    
                 </div>
             </div>
     
-        </body>
     </div>
 }
 
