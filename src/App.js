@@ -1,6 +1,17 @@
 import './App.css';
-import ManageTutorTimes from './component/ManageTutorTimes';
+
+//Colum
+import TutorSubjectsAndTimes from './component/tutorSubjectsAndTimes/TutorSubjectsAndTimes';
+
+//Luke
+import Meeting from './component/Meeting/meeting';
+
+//Rick
 import SignUpPage from './component/signUpPage/signUpPage';
+
+//Yi-Chun
+import SearchPage from './component/SearchPage/SearchPage';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,8 +21,6 @@ import NavigationBar from './component/navigationBar';
 import { useEffect } from 'react'
 
 const App = () => {
-
-  const userId = 1;
 
   useEffect(() => {
 
@@ -29,10 +38,14 @@ const App = () => {
         <Route path="/signUp">
           <SignUpPage />
         </Route>
-        <Route exact path="/">
-          <div className="App">
-            <ManageTutorTimes userId={userId} serverError={serverError} />
-          </div>
+        <Route path="/Meeting">
+          <Meeting />
+        </Route>
+        <Route path="/">
+          <Meeting />
+        </Route>
+        <Route path="/manageTutorTimes">
+          <TutorSubjectsAndTimes />
         </Route>
       </Switch>
     </Router>
