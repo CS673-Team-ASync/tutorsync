@@ -8,9 +8,10 @@ import Meeting from './component/Meeting/meeting';
 
 //Rick
 import SignUpPage from './component/signUpPage/signUpPage';
+import ProtectedRoute from './component/protectedRoute'
 
 //Yi-Chun
-import SearchPage from './component/SearchPage/SearchPage';
+// import SearchPage from './component/SearchPage/SearchPage';
 
 import {
   BrowserRouter as Router,
@@ -18,35 +19,48 @@ import {
   Route
 } from "react-router-dom";
 import NavigationBar from './component/navigationBar';
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const App = () => {
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   useEffect(() => {
-
-    // perform some basic auth here if there is a jwt token. Make sure it is valid (i.e. we get a response back)
-  }, []);
-
-  const serverError = (err) => {
-    console.log(err);
-  }
+    if (localStorage.getItem("token")) {
+      setIsLoggedIn(true)
+    } else {
+      setIsLoggedIn(false)
+    }
+  }, [])
 
   return (
     <Router>
-      <NavigationBar />
+      <NavigationBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <Switch>
-        <Route path="/signUp">
-          <SignUpPage />
-        </Route>
-        <Route path="/Meeting">
-          <Meeting />
-        </Route>
-        <Route path="/">
-          <Meeting />
-        </Route>
-        <Route path="/manageTutorTimes">
-          <TutorSubjectsAndTimes />
-        </Route>
+        <ProtectedRoute
+          exact
+          path="/manageTutorTimes"
+          component={TutorSubjectsAndTimes}
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+        />
+        <ProtectedRoute
+          exact
+          path="/Meeting"
+          component={Meeting}
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+        />
+        <ProtectedRoute
+          exact
+          path="/"
+          component={Meeting}
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+        />
+        <Route exact path="/signUp" render={() => (
+          <SignUpPage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        )} />
       </Switch>
     </Router>
   );

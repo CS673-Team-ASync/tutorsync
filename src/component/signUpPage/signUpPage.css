@@ -43,3 +43,8 @@ h4 {
 .signUpForm input {
     text-align: left;
 }
+
+.signInText {
+    text-align: center;
+    padding: 10px;
+}

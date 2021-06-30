@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './signUpPage.css';
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
-const SignUpPage = () => {
+const SignUpPage = ({ isLoggedIn, setIsLoggedIn }) => {
 
     // setting up our hooks for manipulating form values
     const [firstName, setFirstName] = useState('');
@@ -10,7 +10,6 @@ const SignUpPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [redirect, setRedirect] = useState(false)
 
     const handleOnSubmit = (e) => {
         // preventing from our default form submission, because we will let React handle this
@@ -34,16 +33,15 @@ const SignUpPage = () => {
             const token = data.token;
             localStorage.setItem("token", 'JWT ' + token);
             if (data.success) {
-                setRedirect(true)
+                setIsLoggedIn(true)
             }
-            console.log(data)
         })
     }
 
 
 
     return (
-        (localStorage.token || redirect) ? (<Redirect
+        (isLoggedIn) ? (<Redirect
             to={{
                 path: "/",
             }}
@@ -63,6 +61,7 @@ const SignUpPage = () => {
                     <input type="password" placeholder="Confirm password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} /><br /><br />
                     <button className="button" onClick={handleOnSubmit}>Submit</button>
                 </form>
+                <div className="signInText">Already a user? Sign in <Link to="/">here!</Link></div>
             </div>
         </div>)
     )
