@@ -1,13 +1,10 @@
 import './App.css';
 
-// bootstrap basic styling
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 //Colum
 import TutorSubjectsAndTimes from './component/tutorSubjectsAndTimes/TutorSubjectsAndTimes';
 
 //Luke
-import ManageMeetings from './component/ManageMeetings/ManageMeetings';
+import Meeting from './component/Meeting/meeting';
 
 //Rick
 import SignUpPage from './component/signUpPage/signUpPage';
@@ -31,11 +28,11 @@ const App = () => {
         <Route path="/signUp">
           <SignUpPage />
         </Route>
-        <Route path="/ManageMeetings">
-          <ManageMeetings />
+        <Route path="/Meeting">
+          <Meeting />
         </Route>
-        <Route path="/SearchPage">
-          <SearchPage/>
+        <Route path="/">
+          <Meeting />
         </Route>
         <Route path="/manageTutorTimes">
           <TutorSubjectsAndTimes />
