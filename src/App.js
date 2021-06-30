@@ -1,6 +1,7 @@
 import './App.css';
 import ManageTutorTimes from './component/ManageTutorTimes';
 import SignUpPage from './component/signUpPage/signUpPage';
+import LandingPage from './component/landingPage/landingPage';
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,16 +19,20 @@ const App = () => {
 
   return (
     <Router>
-      <NavigationBar />
+      <NavigationBar/>
       <Switch>
         <Route path="/signUp">
           <SignUpPage />
+        </Route>
+        <Route path="/landing">
+          <LandingPage />
         </Route>
         <Route path="/">
           <div className="App">
             <ManageTutorTimes userId={userId} serverError={serverError} />
           </div>
         </Route>
+
       </Switch>
     </Router>
   );
