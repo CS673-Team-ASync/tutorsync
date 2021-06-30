@@ -1,11 +1,25 @@
 import { useState, Fragment } from 'react';
-import AvailableTimeItem from './AvailableTimeItem';
+import ScheduledTimeItem from './ScheduledTimeItem';
 import UnscheduledTimeItem from './UnscheduledTimeItem';
+import '../tutorSubjectsAndTimes.css';
+
+/*
+  Name: TimeLists
+  Author: Colum Murphy
+
+  This component allows a tutor to select the time periods
+  they are available for tuition on any given date.  
+
+  The tutors availability is represented as two lists of time periods.
+  The user can move the time periods between the unscheduled
+  and scheduled states by clicking on add and delete icons.
+*/
 
 const TimeLists = () => {
 
   const [isAM, setAM] = useState(false);
 
+  // time periods a tutor is not available for a given date
   const [unscheduledTimes, setUnscheduledTimes] = useState(
     [
       { id: 7, timeString: '7 - 8 am' },
@@ -23,6 +37,7 @@ const TimeLists = () => {
     ]
   ); 
 
+  // time periods a tutor is available for a given date
   const [availableTimes, setAvailableTimes] = useState(
     [
       { id: 13, timeString: '1 - 2 pm' },
@@ -31,7 +46,9 @@ const TimeLists = () => {
     ]
   );
 
-  const onClickPlus = (id) =>{
+  // on click of the add button (add tutor availability) 
+  // a time period is moved from the unscheduled to the available state
+  const onClickAdd = (id) =>{
 
     // get selected item 
     const selectedListItem = 
@@ -54,6 +71,8 @@ const TimeLists = () => {
     setAvailableTimes(availableArray);
   }
 
+  // on click of the delete button (remove tutor availability)
+  // a time period is moved from the available to the unscheduled state
   const onClickDelete = (id) => {
     
     // get selected item
@@ -67,7 +86,7 @@ const TimeLists = () => {
     // set the available times 
     setAvailableTimes(availableArray);
 
-    // add selected item to the available array 
+    // add selected item to the unscheduled array 
     const unscheduledArray = [...unscheduledTimes, selectedListItem[0]];
 
     // sort unscheduled array
@@ -80,10 +99,12 @@ const TimeLists = () => {
   return (
     <div className='twoListContainer'>
 
-      <div>
-        <div className='listHeading'>Unscheduled Times</div>
+      <div className='listContainer'>
+        <div className='listHeading'>
+          Unscheduled Times
+        </div>
         
-        <div className='listContainer'>
+        <div className='itemsContainer'>
           
           <div className='listButton'>
             <div 
@@ -109,8 +130,8 @@ const TimeLists = () => {
               <UnscheduledTimeItem 
                 key={unscheduledTime.id}
                 id={unscheduledTime.id} 
-                time={unscheduledTime.timeString} 
-                onClickPlus={onClickPlus}
+                timePeriod={unscheduledTime.timeString} 
+                onClickAdd={onClickAdd}
               />
               : ( 
                 <Fragment key={unscheduledTime.id} > 
@@ -121,15 +142,17 @@ const TimeLists = () => {
         </div>
       </div>
 
-      <div>
-        <div className='listHeading'>Tutor Available Times</div>  
-        <div className='listContainer'>
+      <div className='listContainer'>
+        <div className='listHeading'>
+          Tutor Available Times
+        </div>  
+        <div className='itemsContainer'>
           {availableTimes.map( availableTime => {
             return (
-              <AvailableTimeItem
+              <ScheduledTimeItem
                 key={availableTime.id}
                 id={availableTime.id} 
-                time={availableTime.timeString} 
+                timePeriod={availableTime.timeString} 
                 onClickDelete={onClickDelete}
               />
             )
