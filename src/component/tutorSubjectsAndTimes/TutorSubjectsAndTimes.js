@@ -1,5 +1,6 @@
 import ManageTutorSubjects from './subjects/ManageTutorSubjects';
 import ManageTutorTimes from './times/ManageTutorTimes';
+import { Container, Row, Col } from 'react-bootstrap';
 
 /*
   Name: TutorSubjectsAndTimes
@@ -11,20 +12,18 @@ import ManageTutorTimes from './times/ManageTutorTimes';
 
 const TutorSubjectsAndTimes = () => {
   return (
-    <div className='pageContainer'>
-
-      <div className='container-fluid'>
-        <div className='row rowContainer justify-content-around'>
-          <div className='col-5 colContainer'>
+    <div className='pageContainer'> 
+      <Container fluid>
+        <Row className="justify-content-sm-center">
+          <Col sm={5}>
             <ManageTutorSubjects />
-          </div>
-          <div className='col-5 colContainer'>
+          </Col>
+          <Col sm={{ span:5, offset:1 }}>
             <ManageTutorTimes />
-          </div>
-        </div>  
-      </div>
-
-    </div>       
+          </Col>
+        </Row>
+      </Container>
+    </div>
   )
 }
 
