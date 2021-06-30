@@ -31,10 +31,10 @@ const App = () => {
         <Route path="/Meeting">
           <Meeting />
         </Route>
-        <Route path="/">
+        <Route exact path="/">
           <Meeting />
         </Route>
-        <Route path="/manageTutorTimes">
+        <Route path="/tutor">
           <TutorSubjectsAndTimes />
         </Route>
       </Switch>
