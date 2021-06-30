@@ -1,13 +1,13 @@
 .search1{
-    margin-left: 2in;
-    margin-top: 1in;
+    margin-left: 150px;
+    margin-top: 150px;
     text-align: left;
   }
   
 .search2{
     position: relative;
     text-align: left;
-    float: left;
+    display: inline-block;
     margin-left: 100px;
   }
   
