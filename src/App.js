@@ -12,9 +12,9 @@ import ProtectedRoute from './component/protectedRoute'
 
 import LandingPage from './component/landingPage/landingPage';
 
-
+import ManageMeetings from './component/ManageMeetings/ManageMeetings'
 //Yi-Chun
-// import SearchPage from './component/SearchPage/SearchPage';
+import SearchPage from './component/SearchPage/SearchPage';
 
 
 import {
@@ -51,16 +51,27 @@ const App = () => {
         <ProtectedRoute
           exact
           path="/"
-          component={Meeting}
+          component={SearchPage}
           isLoggedIn={isLoggedIn}
           setIsLoggedIn={setIsLoggedIn}
         />
-        <Route path="/tutor">
-          <TutorSubjectsAndTimes />
-        </Route>
-        <Route path="/landing">
-          <LandingPage />
-        </Route>
+        <ProtectedRoute
+          exact
+          path="/manageMeetings"
+          component={ManageMeetings}
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+        />
+        <ProtectedRoute
+          exact
+          path="/tutor"
+          component={TutorSubjectsAndTimes}
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+        />
+        <Route exact path="/landing" render={() => (
+          <LandingPage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        )} />
         <Route exact path="/signUp" render={() => (
           <SignUpPage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         )} />
