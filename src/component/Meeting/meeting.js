@@ -59,7 +59,6 @@ const Meeting = () => {
       </Row>
       <Row>
         <Col md={{ span: 11, offset: 0 }}>&nbsp;</Col>
-
         <Col md={{ span: 3, offset: 2 }}>
           <Button variant="secondary" href="#" block>Chat</Button>
         </Col>

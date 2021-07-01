@@ -36,13 +36,20 @@ const App = () => {
         <Route path="/landing">
           <LandingPage />
         </Route>
+<<<<<<< Updated upstream
         <Route path="/">
           <div className="App">
             <ManageTutorTimes userId={userId} serverError={serverError} />
           </div>
 
         <Route path="/Meeting">
+=======
+        {/* <Route exact path="/">
+>>>>>>> Stashed changes
           <Meeting />
+        </Route> */}
+        <Route exact path="/">
+          <SearchPage />
         </Route>
       
         <Route path="/tutor">
