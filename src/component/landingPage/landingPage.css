@@ -46,7 +46,11 @@ h3 {
   margin-right: 80px;
   margin-top: 200px;
 	/* overflow: auto; */
-}   
+}
+
+.loginButton {
+  margin-top: 20px;
+}
 
 
 

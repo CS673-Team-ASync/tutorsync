@@ -61,7 +61,7 @@ const SignUpPage = ({ isLoggedIn, setIsLoggedIn }) => {
                     <input type="password" placeholder="Confirm password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} /><br /><br />
                     <button className="button" onClick={handleOnSubmit}>Submit</button>
                 </form>
-                <div className="signInText">Already a user? Sign in <Link to="/landing">here!</Link></div>
+                <div className="signInText">Already have an account? Sign in <Link to="/landing">here!</Link></div>
             </div>
         </div>)
     )

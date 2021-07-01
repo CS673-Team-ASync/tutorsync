@@ -1,5 +1,4 @@
 import React from "react"
-import './navigationBar.css';
 import {
     Link
 } from "react-router-dom";
@@ -14,8 +13,8 @@ const NavigationBar = ({ isLoggedIn, setIsLoggedIn }) => {
     }
 
     return isLoggedIn ? (
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand"><Link to="/">TutorSync</Link></a>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <Link class="navbar-brand" to="/">TutorSync</Link>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -23,15 +22,13 @@ const NavigationBar = ({ isLoggedIn, setIsLoggedIn }) => {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" ><Link to="/tutor">Manage Tutor Times</Link><span class="sr-only">(current)</span></a>
+                        <Link class="nav-link" to="/tutor">Manage Tutor Times</Link><span class="sr-only">(current)</span>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" ><Link to="/manageMeetings">Manage Meetings</Link></a>
+                    <li class="nav-item active">
+                        <Link class="nav-link" to="/manageMeetings">Manage Meetings</Link>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link">
-                            <Link to="/meeting">Go To Meeting</Link>
-                        </a>
+                    <li class="nav-item active">
+                        <Link class="nav-link" to="/meeting">Go To Meeting</Link>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
@@ -39,7 +36,7 @@ const NavigationBar = ({ isLoggedIn, setIsLoggedIn }) => {
                 </form>
             </div>
         </nav>
-    ) : (<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    ) : (<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="#">TutorSync</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

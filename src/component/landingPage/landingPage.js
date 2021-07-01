@@ -30,8 +30,7 @@ const LandingPage = ({ isLoggedIn, setIsLoggedIn }) => {
                         <input type="text" id="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} /><br />
                         <label>Password</label><br />
                         <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} /><br />
-                        <button className="login">Login</button> <br />
-                        <button className="signup">Sign Up</button>
+                        <button className="loginButton">Login</button> <br />
                     </form>
                     <div className="signInText">Dont have an account yet? Sign up <Link to="/signUp">here!</Link></div>
                 </div>
