@@ -9,8 +9,12 @@ import Meeting from './component/Meeting/meeting';
 //Rick
 import SignUpPage from './component/signUpPage/signUpPage';
 
+import LandingPage from './component/landingPage/landingPage';
+
+
 //Yi-Chun
 import SearchPage from './component/SearchPage/SearchPage';
+
 
 import {
   BrowserRouter as Router,
@@ -23,20 +27,29 @@ const App = () => {
 
   return (
     <Router>
-      <NavigationBar />
+      <NavigationBar/>
       <Switch>
         <Route path="/signUp">
           <SignUpPage />
         </Route>
+
+        <Route path="/landing">
+          <LandingPage />
+        </Route>
+        <Route path="/">
+          <div className="App">
+            <ManageTutorTimes userId={userId} serverError={serverError} />
+          </div>
+
         <Route path="/Meeting">
           <Meeting />
         </Route>
-        <Route exact path="/">
-          <Meeting />
-        </Route>
+      
         <Route path="/tutor">
           <TutorSubjectsAndTimes />
+
         </Route>
+
       </Switch>
     </Router>
   );
