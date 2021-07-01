@@ -1,7 +1,21 @@
 import './App.css';
-import ManageTutorTimes from './component/ManageTutorTimes';
+
+//Colum
+import TutorSubjectsAndTimes from './component/tutorSubjectsAndTimes/TutorSubjectsAndTimes';
+
+//Luke
+import Meeting from './component/Meeting/meeting';
+
+//Rick
 import SignUpPage from './component/signUpPage/signUpPage';
+
 import LandingPage from './component/landingPage/landingPage';
+
+
+//Yi-Chun
+import SearchPage from './component/SearchPage/SearchPage';
+
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,12 +25,6 @@ import NavigationBar from './component/navigationBar';
 
 const App = () => {
 
-  const userId = 1;
-
-  const serverError = (err) => {
-    console.log(err);
-  }
-
   return (
     <Router>
       <NavigationBar/>
@@ -24,6 +32,7 @@ const App = () => {
         <Route path="/signUp">
           <SignUpPage />
         </Route>
+
         <Route path="/landing">
           <LandingPage />
         </Route>
@@ -31,6 +40,14 @@ const App = () => {
           <div className="App">
             <ManageTutorTimes userId={userId} serverError={serverError} />
           </div>
+
+        <Route path="/Meeting">
+          <Meeting />
+        </Route>
+      
+        <Route path="/tutor">
+          <TutorSubjectsAndTimes />
+
         </Route>
 
       </Switch>
