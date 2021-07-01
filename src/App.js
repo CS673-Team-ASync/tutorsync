@@ -1,12 +1,19 @@
 import './App.css';
+
 //Colum
-import ManageTutorTimes from './component/ManageTutorTimes';
+import TutorSubjectsAndTimes from './component/tutorSubjectsAndTimes/TutorSubjectsAndTimes';
 
 //Luke
-import ManageMeetings from './component/ManageMeetings/ManageMeetings';
+import Meeting from './component/Meeting/meeting';
 
 //Rick
 import SignUpPage from './component/signUpPage/signUpPage';
+
+import LandingPage from './component/landingPage/landingPage';
+
+
+//Yi-Chun
+import SearchPage from './component/SearchPage/SearchPage';
 
 
 import {
@@ -18,30 +25,31 @@ import NavigationBar from './component/navigationBar';
 
 const App = () => {
 
-  const userId = 1;
-
-  const serverError = (err) => {
-    console.log(err);
-  }
-
   return (
     <Router>
-      <NavigationBar />
+      <NavigationBar/>
       <Switch>
         <Route path="/signUp">
           <SignUpPage />
         </Route>
-        <Route path="/manageMeetings">
-          <ManageMeetings />
+
+        <Route path="/landing">
+          <LandingPage />
         </Route>
         <Route path="/">
-          <ManageMeetings />
-        </Route>
-        <Route path="/manageTutorTimes">
-        <div className="App">
+          <div className="App">
             <ManageTutorTimes userId={userId} serverError={serverError} />
           </div>
+
+        <Route path="/Meeting">
+          <Meeting />
         </Route>
+      
+        <Route path="/tutor">
+          <TutorSubjectsAndTimes />
+
+        </Route>
+
       </Switch>
     </Router>
   );
