@@ -1,18 +1,80 @@
 {
-  "available": [
+  "users": [
+    {
+      "id": 10,
+      "name": "Bill"
+    },
+    {
+      "id": 11,
+      "name": "John"
+    }
+  ],
+  "available-times": [
     {
       "id": 1,
-      "title": "json-server",
-      
-      "author": "typicode",
-      "date": "2021-05-10T17:09:00.053Z"
+      "startDateTime": "2021-07-11T21:00:00.000Z",
+      "endDateTime": "2021-07-11T22:00:00.000Z",
+      "userId": 10
     },
     {
       "id": 2,
-      "title": "json-server",
-      
-      "author": "typicode",
-      "date": "2021-05-10T17:09:00.053Z"
+      "startDateTime": "2021-07-11T22:00:00.000Z",
+      "endDateTime": "2021-07-11T23:00:00.000Z",
+      "userId": 10
+    },
+    {
+      "id": 3,
+      "startDateTime": "2021-07-01T16:00:00.000Z",
+      "endDateTime": "2021-07-01T17:00:00.000Z",
+      "userId": 10
+    },
+    {
+      "id": 4,
+      "startDateTime": "2021-07-26T18:00:00.000Z",
+      "endDateTime": "2021-07-26T19:00:00.000Z",
+      "userId": 10
+    },
+    {
+      "id": 6,
+      "startDateTime": "2021-07-23T02:00:00.000Z",
+      "endDateTime": "2021-07-23T03:00:00.000Z",
+      "userId": 10
+    },
+    {
+      "id": 7,
+      "startDateTime": "2021-07-23T01:00:00.000Z",
+      "endDateTime": "2021-07-23T02:00:00.000Z",
+      "userId": 10
+    },
+    {
+      "id": 8,
+      "startDateTime": "2021-08-10T20:00:00.000Z",
+      "endDateTime": "2021-08-10T21:00:00.000Z",
+      "userId": 10
+    },
+    {
+      "id": 10,
+      "startDateTime": "2021-07-19T21:00:00.000Z",
+      "endDateTime": "2021-07-19T22:00:00.000Z",
+      "userId": 10
+    }
+  ],
+  "scheduled-meeting": [
+    {
+      "studentId": 1,
+      "tutorId": 10,
+      "subjectId": 20,
+      "startDateTime": "2021-07-26T16:00:00.000Z",
+      "endDateTime": "2021-07-26T17:00:00.000Z",
+      "id": 1
+    },
+    {
+      "studentId": 1,
+      "tutorId": 10,
+      "subjectId": 20,
+      "startDateTime": "2021-07-19T20:00:00.000Z",
+      "endDateTime": "2021-07-19T21:00:00.000Z",
+      "id": 2
     }
   ]
 }
