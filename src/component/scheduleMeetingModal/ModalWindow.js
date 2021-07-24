@@ -108,9 +108,9 @@ const ModalWindow = (props) => {
 
     const dateObjectArray = timeStringArray.map(item => {
       return {
-        'id': item.id,
-        'startDateTime': new Date(item.startDateTime),
-        'endDateTime': new Date(item.endDateTime)
+        id: item.id,
+        startDateTime: new Date(item.startDateTime),
+        endDateTime: new Date(item.endDateTime)
       }
     });
 
