@@ -33,7 +33,10 @@ const ManageTutorTimes = () => {
 
   return (
     <div className="App">      
-      <DateComponent changeSelectedDate={changeSelectedDate}/>
+      <DateComponent 
+        changeSelectedDate={changeSelectedDate}
+        datesToHighlight={[]}
+      />
       <TimeLists />
     </div>
   );
