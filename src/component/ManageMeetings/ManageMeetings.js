@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Container, Row, Col } from 'react-bootstrap';
 import './ManageMeetings.css';
 
 const ManageMeetings = () => {
 
+    const [pastMeetings, setPastMeetings] = useState([]);
+    const [upcomingMeetings, setUpcomingMeetings] = useState([]);
+
+    useEffect(() => {
+
+        console.log('Testing use effect')
+        fetch(`http://localhost:9000/meetings/list/${localStorage.token}`).then((response) => response.json()).then(response => {
+            setPastMeetings(response.data.pastMeetings);
+            setUpcomingMeetings(response.data.upcomingMeetings);
+            console.log(response.data, pastMeetings, upcomingMeetings)
+        })
+    }, []);
 
     <h1>ManageMeetings</h1>
 
@@ -40,9 +52,15 @@ const ManageMeetings = () => {
                     <div class="card">
                         <h5 class="card-header"><strong>Completed Meetings</strong></h5>
                         <div class="card-body">
-                            <h5 class="card-title">Grade 11 Statistics</h5>
-                            <p class="card-text">Prof. Czik</p>
-                            <a href="#" class="btn btn-primary">Download Media</a>
+                            {pastMeetings.map(userMeeting => {
+                                return (
+                                    <>
+                                        <h5 class="card-title">{userMeeting.meeting.title}</h5>
+                                        <p class="card-text">{`${userMeeting.participant.firstName}  ${userMeeting.participant.lastName}`}</p>
+                                        <a href="#" class="btn btn-primary">Download Media</a>
+                                    </>)
+
+                            })}
                         </div>
                     </div>
                 </Col>

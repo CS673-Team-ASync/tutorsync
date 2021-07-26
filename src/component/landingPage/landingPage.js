@@ -6,6 +6,29 @@ const LandingPage = ({ isLoggedIn, setIsLoggedIn }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+
+    const handleOnSubmit = (e) => {
+        // preventing from our default form submission, because we will let React handle this
+        e.preventDefault()
+        const userData = {
+            email,
+            password
+        }
+        fetch("http://localhost:9000/users/login", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData),
+        }).then((response) => response.json()).then(data => {
+            const token = data.token;
+            localStorage.setItem("token", 'JWT ' + token);
+            if (data.success) {
+                setIsLoggedIn(true)
+            }
+        })
+    }
+
     return (isLoggedIn ? (<Redirect
         to={{
             path: "/",
@@ -30,7 +53,7 @@ const LandingPage = ({ isLoggedIn, setIsLoggedIn }) => {
                         <input type="text" id="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} /><br />
                         <label>Password</label><br />
                         <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} /><br />
-                        <button className="loginButton">Login</button> <br />
+                        <button className="loginButton" onClick={handleOnSubmit}>Login</button> <br />
                     </form>
                     <div className="signInText">Dont have an account yet? Sign up <Link to="/signUp">here!</Link></div>
                 </div>
