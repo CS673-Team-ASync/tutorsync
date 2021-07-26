@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SearchPage.css";
 
+
 const SearchPage = () => {
+
+    const [subjectInput, setSubjectInput] = useState('')
+    const [tutors, setTutors] = useState('')
+
+    const handleSearchSubmit = () => {
+        fetch(`http://localhost:9000/subjects/list?id=${localStorage.token}&subject=${subjectInput}`).then((response) => response.json()).then(response => {
+            setTutors(response.data.subjects);
+        }).then(response => console.log("This is the search input response: ", response))
+    }
 
     return <div>
         <div className="search1">
@@ -15,15 +25,10 @@ const SearchPage = () => {
 
             <div className="search2">
                 <p>
-                    <label htmlFor="tutor-search">Search for Tutor</label>
-                </p>
-                <input type="text" id="name" name="name" aria-label="Search through site content"></input>
-
-                <p>
                     <label htmlFor="subject-search">Search for Subject</label>
                 </p>
-                <input type="text" id="subject" name="subject" aria-label="Search through site content"></input>
-
+                <input type="text" id="subject" name="subject" value={subjectInput} onChange={e => setSubjectInput(e.target.value)} aria-label="Search through site content"></input>
+                <button onClick={handleSearchSubmit}>Search For Tutors</button>
                 <p>
                     Availability (days)
                     </p>

@@ -8,7 +8,7 @@ const ManageMeetings = () => {
     // const [upcomingMeetings, setUpcomingMeetings] = useState([]); // TODO - implement upcoming meetings
 
     useEffect(() => {
-        fetch(`http://localhost:9000/meetings/list/${localStorage.token}`).then((response) => response.json()).then(response => {
+        fetch(`http://localhost:9000/meetings/list?id=${localStorage.token}`).then((response) => response.json()).then(response => {
             setPastMeetings(response.data.pastMeetings);
             // setUpcomingMeetings(response.data.upcomingMeetings); // TODO - implement upcoming meetings
         })
