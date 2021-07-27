@@ -13,34 +13,31 @@ const NavigationBar = ({ isLoggedIn, setIsLoggedIn }) => {
     }
 
     return isLoggedIn ? (
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <Link class="navbar-brand" to="/">TutorSync</Link>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+            <Link className="navbar-brand" to="/">TutorSync</Link>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <Link class="nav-link" to="/tutor">Manage Tutor Times</Link><span class="sr-only">(current)</span>
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul className="navbar-nav mr-auto">
+                    <li className="nav-item active">
+                        <Link className="nav-link" to="/tutor">Manage Tutor Times</Link><span className="sr-only">(current)</span>
                     </li>
-                    <li class="nav-item active">
-                        <Link class="nav-link" to="/manageMeetings">Manage Meetings</Link>
+                    <li className="nav-item active">
+                        <Link className="nav-link" to="/manageMeetings">Manage Meetings</Link>
                     </li>
-                    <li class="nav-item active">
-                        <Link class="nav-link" to="/meeting">Go To Meeting</Link>
+                    <li className="nav-item active">
+                        <Link className="nav-link" to="/meeting">Go To Meeting</Link>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <button type="button" onClick={handleSignOut} class="form-control mr-sm-2">Sign Out</button>
+                <form className="form-inline my-2 my-lg-0">
+                    <button type="button" onClick={handleSignOut} className="form-control mr-sm-2">Sign Out</button>
                 </form>
             </div>
         </nav>
-    ) : (<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="#">TutorSync</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    ) : (<nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+        <Link className="navbar-brand" to="/">TutorSync</Link>
     </nav>)
 }
 
