@@ -13,9 +13,13 @@ import Meeting from './component/Meeting/meeting';
 import SignUpPage from './component/signUpPage/signUpPage';
 import ProtectedRoute from './component/protectedRoute'
 
+
 import LandingPage from './component/landingPage/landingPage';
 
+//Tuoyang
 import ManageMeetings from './component/ManageMeetings/ManageMeetings'
+import UserProfile from './component/userProfile/userProfile';
+
 //Yi-Chun
 import SearchPage from './component/SearchPage/SearchPage';
 
@@ -76,6 +80,13 @@ const App = () => {
           exact
           path="/manageMeetings"
           component={ManageMeetings}
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+        />
+        <ProtectedRoute
+          exact
+          path="/userProfile"
+          component={UserProfile}
           isLoggedIn={isLoggedIn}
           setIsLoggedIn={setIsLoggedIn}
         />
