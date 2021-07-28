@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 import { Button, Container, Row, Col } from 'react-bootstrap';
 import './ManageMeetings.css';
+import Meeting from '../Meeting/meeting';
+import SearchPage from '../SearchPage/SearchPage';
+import TutorSubjectsAndTimes from '../tutorSubjectsAndTimes/TutorSubjectsAndTimes';
+
 
 const ManageMeetings = () => {
 
@@ -28,18 +33,18 @@ const ManageMeetings = () => {
 
             <Row>
                 <Col>
-                    <ul className="nav nav-tabs">
-                        <li className="nav-item">
-                            <a className="nav-link active" href="#">Student</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">Tutor</a>
-                        </li>
-                    </ul>
+                <Link to="../tutor">
+                <Button variant="primary">Add Subjects + Availability</Button>
+                </Link>
                 </Col>
+
                 <Col></Col>
-                <Col></Col>
-                <Col xs={6}><Button variant="primary">Search + Schedule Meeting</Button>{' '}</Col>
+                
+                <Col xs={6}>
+                    <Link to="../">
+                    <Button variant="primary">Search + Schedule Meetings</Button>{' '}
+                    </Link>
+                </Col>
             </Row>
 
             <br></br>
@@ -68,8 +73,10 @@ const ManageMeetings = () => {
                         <div className="card-body">
                             <h5 className="card-title">Grade 12 Geometry</h5>
                             <p className="card-text">Prof. Czik</p>
-                            <a href="#" className="btn btn-primary">Join Meeting</a>
-                   &nbsp;&nbsp;&nbsp;
+                            <Link to="../meeting">
+                            <a href="#" class="btn btn-primary">Join Meeting</a>
+                            </Link>
+                            &nbsp;&nbsp;&nbsp;
                    <a href="#" className="btn btn-danger">Cancel</a>
                         </div>
                     </div>
