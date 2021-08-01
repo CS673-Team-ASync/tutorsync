@@ -17,9 +17,9 @@ const LandingPage = ({ isLoggedIn, setIsLoggedIn }) => {
                 <Col sm={9}>
                 <Container>
                 <img class="logo" src="https://clueylearning.com.au/wp-content/uploads/2019/08/most-effective-way-to-study-according-to-science.jpg" />
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Viverra adipiscing at in tellus integer feugiat. Sapien pellentesque habitant morbi tristique senectus et. Senectus et netus et malesuada fames ac turpis egestas. Cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In aliquam sem fringilla ut morbi tincidunt augue. Erat nam at lectus urna. Nulla posuere sollicitudin aliquam ultrices. Tellus pellentesque eu tincidunt tortor. Diam volutpat commodo sed egestas.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Viverra adipiscing at in tellus integer feugiat. Sapien pellentesque habitant morbi tristique senectus et. Senectus et netus et malesuada fames ac turpis egestas. Cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In aliquam sem fringilla ut morbi tincidunt augue. Erat nam at lectus urna. Nulla posuere sollicitudin aliquam ultrices. Tellus pellentesque eu tincidunt tortor. Diam volutpat commodo sed egestas.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Viverra adipiscing at in tellus integer feugiat. Sapien pellentesque habitant morbi tristique senectus et. Senectus et netus et malesuada fames ac turpis egestas. Cursus vitae congue mauris rhoncus aenean vel elit scelerisque. In aliquam sem fringilla ut morbi tincidunt augue. Erat nam at lectus urna. Nulla posuere sollicitudin aliquam ultrices. Tellus pellentesque eu tincidunt tortor. Diam volutpat commodo sed egestas.</p>
+                <h1>What is TutorSync?</h1>
+                <p>TutorSync is a web based, online teaching platform for real time tutoring session. You could use TutorSync to find many kinds of tutors, teachers, coaches, and experts to help you accomplish your learning goals.</p>
+                <p>TutorSync features real-time sketch pad that could be useful to enhance illustration and communication. On TutorSync, you could also schedule and manage your tutorial sessions easily.</p>
                 </Container>
                 </Col>
                 
