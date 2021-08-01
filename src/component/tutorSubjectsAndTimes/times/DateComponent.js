@@ -132,22 +132,22 @@ const DateComponent = (props) => {
 
   return (
     <>
-      <div className='dateComponentWrapper'> 
+      <div className='w5a_dateComponentWrapper'> 
         
         <div>
-          <div className='calendarTitleContainer'>
-            <div className='calendarTitle'>   
-              <div className='arrowLeft'>
+          <div className='w5a_calendarTitleContainer'>
+            <div className='w5a_calendarTitle'>   
+              <div className='w5a_arrowLeft'>
                 <BsArrowLeft
                   id='monthBackArrow'
                   style={arrowStyle}
                   onClick={moveMonthBack}
                 />
               </div> 
-              <div className='calendarText'>
+              <div className='w5a_calendarText'>
                 Calendar
               </div>
-              <div className='arrowRight'>
+              <div className='w5a_arrowRight'>
                 <BsArrowRight
                   id='monthForwardArrow'
                   style={arrowStyle}

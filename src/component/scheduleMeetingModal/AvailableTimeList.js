@@ -53,22 +53,22 @@ const AvailableTimeList = (props) => {
   }
 
   return (
-    <div className='itemsContainer'>
+    <div className='w5_itemsContainer'>
       { timeSlotsForDate.map(timeSlot => {
         return (
           <div 
             key={timeSlot.id}
-            className='itemStyle'               
+            className='w5_itemStyle' 
             style={{ backgroundColor: (selectedTimeSlot !== null 
               && selectedTimeSlot.id === timeSlot.id) 
-              ? w5_colors.highlightItemColor : w5_colors.defaultItemColor }}                                
+              ? w5_colors.highlightItemColor : w5_colors.defaultItemColor }}
           >
             <div>
               {formatTime(timeSlot.startDateTime, timeSlot.endDateTime)}
             </div>              
             <BsPlusCircleFill
-              id='addIcon'
-              style={{color: w5_colors.blueCircleIcon, cursor: 'pointer'}}              
+              id='selectTimeSlotIcon'
+              style={w5_selectTimeSlotIcon}
               onClick={() => setSelectedTimeSlot(timeSlot)}
             />
           </div>
@@ -78,8 +78,13 @@ const AvailableTimeList = (props) => {
   )
 }
 
+const w5_selectTimeSlotIcon = {
+  color: '#0000FF',
+  cursor: 'pointer',
+  flex: '0 0 1rem'
+}
+
 const w5_colors = {
-  blueCircleIcon: '#0000FF',
   highlightItemColor: '#FFFF00',
   defaultItemColor: '#FFFFFF'
 }

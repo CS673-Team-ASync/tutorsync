@@ -94,6 +94,7 @@ const App = () => {
           exact
           path="/tutor"
           component={TutorSubjectsAndTimes}
+          handleError={handleError}
           isLoggedIn={isLoggedIn}
           setIsLoggedIn={setIsLoggedIn}
         />

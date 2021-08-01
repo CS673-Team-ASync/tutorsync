@@ -14,7 +14,7 @@ import ModalWindow from './ModalWindow';
   
   In the working version of the App, the Modal window will be 
   launched by the Search page.  It will supply values for 
-  userId, tutorId, subjectId, tutorSubjectTitle and tutorName.  
+  userId, tutorId, subjectTitle, subjectDescription and tutorName.  
   It will also have the component state, shown below, 
   to hide or show the modal window.    
 */
@@ -27,14 +27,14 @@ const ModalTestPage = (props) => {
   // state to hide or show the modal window
   const [modalShow, setModalShow] = useState(false);
   const showModal = () => setModalShow(true);
-  const hideModal = () => setModalShow(false);
+  const hideModal = () => setModalShow(false);  
 
   // dummy values
-  const userId = 1;     // id of the current user
-  const tutorId = 10;   // id of the tutor selected by the user
-  const subjectId = 20; // id of the subject selected by the user
-  const tutorSubjectTitle = 'Algebra';  // title of subject selected by the user
-  const tutorName = 'John Smith'; // name of tutor selected by the user
+  const userId = "60ff3b354f07b26d302b2583";  // id of the current user
+  const tutorId = "60ff3b354f07b26d302b2580"; // id of the tutor selected by the user
+  const subjectTitle = 'Algebra';             // id of the subject selected by the user
+  const subjectDescription = 'Algebra Desc';  // title of subject selected by the user
+  const tutorName = 'Tuoyang';                // name of tutor selected by the user 
 
   return (
     <>
@@ -47,8 +47,8 @@ const ModalTestPage = (props) => {
         hideModal={hideModal}
         studentId={userId}
         tutorId={tutorId}
-        subjectId={subjectId}
-        tutorSubjectTitle={tutorSubjectTitle} 
+        subjectTitle={subjectTitle}
+        subjectDescription={subjectDescription}
         tutorName={tutorName}
         handleError={handleError}     
       />

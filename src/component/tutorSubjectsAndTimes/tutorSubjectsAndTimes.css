@@ -1,15 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+/* Wireframe 5a page style */
+.w5a_pageContainer {
+	margin-top: 10px;
+}
 
-* {
-	font-family: "Roboto", sans-serif;
+.w5a_pageContainer * {
 	box-sizing: border-box;
 }
 
-.pageContainer {
-	margin-top: 60px;
+.w5a_pageContainer .container {
+	margin-top: 0px;
 }
 
-.calendarTitleContainer {
+/* Calendar CSS */
+.w5a_calendarTitleContainer {
 	display: inline-block;
 	width: 243px;
 	border-radius: 5px;
@@ -18,37 +21,19 @@
 	color: #f8f9fa;
 }
 
-.calendarTitle {
+.w5a_calendarTitle {
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
 }
 
-.calendarText {
+.w5a_calendarText {
 	text-align: center;
 	padding: 6px;
 }
 
-.twoListContainer {
-	display: flex;
-	justify-content: space-between;
-	width: 100%;
-}
-
-.listContainer {
-	margin-top: 10px;
-	width: 48%;
-}
-
-.itemsContainer {
-	border: 2px solid black;
-	border-radius: 5px;
-	width: 100%;
-	height: 30vh;
-	overflow: auto;
-}
-
-.listHeading {
+/* Subject CSS  */
+.w5a_listHeading {
 	border: 2px solid black;
 	padding: 6px;
 	text-align: center;
@@ -57,90 +42,88 @@
 	color: #f8f9fa;
 }
 
-.timeItemContainer {
-	display: flex;
-	justify-content: space-between;
-	border: 2px solid black;
-	margin: 5px;
-	padding: 6px;
-	border-radius: 3px;
-}
-
-.listButton {
-	display: flex;
-}
-
-.listButton #amButton,
-.listButton #pmButton {
-	border: 2px solid black;
-	width: 50%;
-	margin: 5px;
-	padding: 6px;
-	border-radius: 3px;
-	text-align: center;
-	color: #f8f9fa;
-	cursor: pointer;
-}
-
-.subjectTitle {
+.w5a_subjectTitle {
 	display: flex;
 	justify-content: space-between;
 }
 
-.subjectTitleText {
+.w5a_subjectTitleText {
 	font-size: 1.2rem;
 }
 
-.subjectItemContainer {
+.w5a_subjectItemContainer {
 	border: 2px solid black;
 	margin: 5px;
 	padding: 6px;
 	border-radius: 3px;
 }
 
-.subjectListContainer {
+.w5a_subjectListContainer {
 	border: 2px solid black;
 	border-radius: 5px;
 	overflow: auto;
-	height: 44vh;
+	height: 240px;
 }
 
-.form-group label {
-	display: block;
-}
-
-.inputGroup input {
+.w5a_inputGroup input {
 	width: 100%;
 	font-size: 1rem;
 	border-radius: 3px;
 	border: 1px solid black;
 }
 
-.inputGroup {
+.w5a_inputGroup {
 	margin-top: 15px;
 }
 
-.inputGroup label {
+.w5a_inputGroup label {
 	line-height: 1;
 }
 
-.buttonGroup {
+.w5a_addSubjectButton {
 	margin-top: 25px;
 }
 
-.inButton {
-	width: 100%;
-	font-size: 1rem;
+/* Available Times List */
+.w5a_itemsContainer {
+	border: 2px solid black;
+	border-radius: 5px;
+	height: 170px;
+	overflow: auto;
+}
+
+.w5a_itemStyle {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 	border: 2px solid black;
 	border-radius: 3px;
-	padding: 6px;
+	margin: 4px;
+	padding: 3px;
+	font-size: 1rem;
 }
 
-.inButton-block {
-	display: block;
+/* Select Time and Duration CSS */
+.w5a_flexRowContainer {
+	display: flex;
 }
 
-.inButton-blue {
-	background-color: #007bff;
-	color: #f8f9fa;
+.w5a_flexRowItem {
+	flex: 1;
+}
+
+.w5a_flexColumnContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-start;
+	height: 100%;
+}
+
+.w5a_alertMessage {
+	margin-top: 5px;
+}
+
+.w5a_addTimeSlotButton button {
+	width: auto;
 }

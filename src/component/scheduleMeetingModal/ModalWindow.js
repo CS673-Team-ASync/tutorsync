@@ -1,10 +1,10 @@
 import {useState, useEffect} from 'react';
+import PropTypes from 'prop-types';
 import {Row, Col, Container, Button, Modal, Alert} from 'react-bootstrap';
 import DateComponent from '../tutorSubjectsAndTimes/times/DateComponent';
 import AvailableTimeList from './AvailableTimeList';
 import getTutorAvailability from './actions/getTutorAvailability';
 import postScheduledMeeting from './actions/postScheduledMeeting';
-import deleteTutorTimeSlot from './actions/deleteTutorTimeSlot';
 import './modalWindow.css';
 
 
@@ -27,8 +27,8 @@ import './modalWindow.css';
 
 const ModalWindow = (props) => {
 
-  const {modalShow, hideModal, studentId, tutorId, subjectId, 
-        tutorSubjectTitle, tutorName, handleError} = props;
+  const {modalShow, hideModal, studentId, tutorId, subjectTitle,
+        subjectDescription, tutorName, handleError} = props;
 
   // the tutor availability
   const [tutorAvailability, setTutorAvailability] = useState([]); 
@@ -67,7 +67,7 @@ const ModalWindow = (props) => {
         return;
       } 
       // convert response data, change date string to date object    
-      convertData(data); 
+      convertData(data.data);
     }
 
     // when the modal opens, get the tutor availability data
@@ -108,9 +108,9 @@ const ModalWindow = (props) => {
 
     const dateObjectArray = timeStringArray.map(item => {
       return {
-        id: item.id,
-        startDateTime: new Date(item.startDateTime),
-        endDateTime: new Date(item.endDateTime)
+        id: item._id,
+        startDateTime: new Date(item.timeslotStart),
+        endDateTime: new Date(item.timeslotEnd)
       }
     });
 
@@ -151,11 +151,12 @@ const ModalWindow = (props) => {
   
     // create a meeting object
     const meeting = {
-      studentId: studentId,
-      tutorId: tutorId,
-      subjectId: subjectId,
-      startDateTime: selectedTimeSlot.startDateTime.toISOString(),
-      endDateTime: selectedTimeSlot.endDateTime.toISOString()
+      title: subjectTitle, 
+      description: subjectDescription, 
+      startTime: selectedTimeSlot.startDateTime.toISOString(), 
+      endTime: selectedTimeSlot.endDateTime.toISOString(), 
+      organizer: studentId, 
+      participant: tutorId
     }
 
     // post the meeting object to the server
@@ -165,16 +166,6 @@ const ModalWindow = (props) => {
     if (resultOfPost.error) {
       showMessage('Error Connecting to Server!', 'danger');
       handleError({status: resultOfPost.status, msg: resultOfPost.msg});
-      return;
-    } 
-
-    // delete the time slot from the tutor available times.
-    const resultOfDelete = await deleteTutorTimeSlot(selectedTimeSlot.id);
-
-    // if there is an error, show a message and pass error to App level 
-    if (resultOfDelete.error) {
-      showMessage('Error Connecting to Server!', 'danger');
-      handleError({status: resultOfDelete.status, msg: resultOfDelete.msg});     
       return;
     } 
 
@@ -203,6 +194,7 @@ const ModalWindow = (props) => {
   return (
     <>
       <Modal 
+        contentClassName="w5_modalWindow"
         show={modalShow} 
         onHide={hideModal}        
         animation={false}   
@@ -213,14 +205,14 @@ const ModalWindow = (props) => {
           <Container>
             <Row>
               <Col>
-                <div className="modalTitle">
+                <div className="w5_modalTitle">
                   Check Availability
                 </div>
               </Col>
             </Row>
             <Row>
               <Col>
-                {tutorSubjectTitle}
+                {subjectTitle}
               </Col>
             </Row>
             <Row>
@@ -235,15 +227,17 @@ const ModalWindow = (props) => {
           <Container>
             <Row>
               <Col xs={7} sm={7}>
-                <div className="columnTitle">Available Dates</div>
-                <DateComponent 
-                  changeSelectedDate={(date) => setSelectedDate(date)}
-                  datesToHighlight={allAvailDates}
-                />
+                <div className="w5_columnTitle">Available Dates</div>
+                <div className="w5_dateComponent">
+                  <DateComponent 
+                    changeSelectedDate={(date) => setSelectedDate(date)}
+                    datesToHighlight={allAvailDates}
+                  />
+                </div>
               </Col>
               <Col xs={5} sm={5}>                
                 <div>
-                  <div className="columnTitle">
+                  <div className="w5_columnTitle">
                     Available Times
                   </div>
                   <AvailableTimeList 
@@ -262,20 +256,20 @@ const ModalWindow = (props) => {
           <Container>
             <Row>
               <Col>
-                <Alert transition={null} show={showAlert} variant={messageType}>
+                <Alert transition={false} show={showAlert} variant={messageType}>
                   {messageText}
                 </Alert>  
               </Col>
             </Row>
             <Row>
               <Col>
-                <div className="modalButtons">
+                <div className="w5_modalButtons">
                   <div>
                     <Button variant="secondary" onClick={hideModal}>
                       Close
                     </Button>
                   </div>
-                  <div className="modalScheduleButton">
+                  <div className="w5_modalScheduleButton">
                     <Button variant="primary" onClick={scheduleMeeting}>
                       Schedule Meeting
                     </Button>
@@ -289,6 +283,17 @@ const ModalWindow = (props) => {
       </Modal>
     </>
   )
+}
+
+ModalWindow.propTypes = {
+  modalShow: PropTypes.bool.isRequired,
+  hideModal: PropTypes.func.isRequired,
+  studentId: PropTypes.string.isRequired,
+  tutorId: PropTypes.string.isRequired,
+  subjectTitle: PropTypes.string.isRequired,
+  subjectDescription: PropTypes.string.isRequired,
+  tutorName: PropTypes.string.isRequired,
+  handleError: PropTypes.func.isRequired,
 }
 
 export default ModalWindow;
