@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {BASE_URL} from '../../../../constants';
 
 /*
   Name: deleteTutorTimeSlot
@@ -10,11 +11,12 @@ import axios from 'axios';
 
 const deleteTutorTimeSlot = async (timeSlotId) => {
 
-  const server = process.env.REACT_APP_SERVER_URL;
-  const url = `${server}/available-times/${timeSlotId}`;
+  const url = `${BASE_URL}availabilites/delete/${timeSlotId}`;
+  const body = { user: localStorage.token };
+  const config = { headers:{ 'Content-Type' : 'application/json'} };
 
   try {
-    const response = await axios.delete(url);
+    const response = await axios.post(url, body, config);
     return { 
       error: false, 
       msg: '', 
@@ -29,8 +31,8 @@ const deleteTutorTimeSlot = async (timeSlotId) => {
     error.response ? errObj.status = error.response.status 
                    : errObj.status = null;
 
-    error.response ? errObj.msg = 'Schedule Meeting Modal - DELETE tutor time slot'
-                   : errObj.msg = 'Schedule Meeting Modal - Cannot connect to server';
+    error.response ? errObj.msg = 'Tutor Availability - DELETE tutor time slot'
+                   : errObj.msg = 'Tutor Availability - Cannot connect to server';
     
     return errObj; 
   } 

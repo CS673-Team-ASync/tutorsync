@@ -10,16 +10,23 @@ import { Container, Row, Col } from 'react-bootstrap';
   using a Bootstrap container.  
 */
 
-const TutorSubjectsAndTimes = () => {
+const TutorSubjectsAndTimes = (props) => {
+
+  const {handleError} = props;
+
   return (
-    <div className='pageContainer'> 
+    <div className='w5a_pageContainer'> 
       <Container fluid>
         <Row className="justify-content-sm-center">
           <Col sm={5}>
-            <ManageTutorSubjects />
+            <ManageTutorSubjects    
+              handleError={handleError}
+            />
           </Col>
           <Col sm={{ span:5, offset:1 }}>
-            <ManageTutorTimes />
+            <ManageTutorTimes     
+              handleError={handleError}
+            />
           </Col>
         </Row>
       </Container>

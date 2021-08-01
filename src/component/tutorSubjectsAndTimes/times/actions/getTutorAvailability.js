@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {BASE_URL} from '../../../constants';
+import {BASE_URL} from '../../../../constants';
 
 /*
   Name: getTutorAvailability
@@ -9,9 +9,9 @@ import {BASE_URL} from '../../../constants';
   and returns the date/time availability for a specific tutor(userId).
 */
 
-const getTutorAvailability = async (userId) => {
+const getTutorAvailability = async () => {
 
-  const url = `${BASE_URL}availabilites/list/${userId}?id=${localStorage.token}`;
+  const url = `${BASE_URL}availabilites/list?id=${localStorage.token}`;
 
   try {
     const response = await axios.get(url);
@@ -29,8 +29,8 @@ const getTutorAvailability = async (userId) => {
     error.response ? errObj.status = error.response.status 
                    : errObj.status = null;
 
-    error.response ? errObj.msg = 'Schedule Meeting Modal - GET tutor availability'
-                   : errObj.msg = 'Schedule Meeting Modal - Cannot connect to server';
+    error.response ? errObj.msg = 'Tutor Availability - GET tutor availability'
+                   : errObj.msg = 'Tutor Availability - Cannot connect to server';
     
     return errObj;    
   } 

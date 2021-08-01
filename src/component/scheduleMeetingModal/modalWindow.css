@@ -1,31 +1,29 @@
-/* temp style */
-button {
-	width: auto !important;
+.w5_modalWindow button {
+	width: auto;
 }
 
-.container {
-	margin-top: 0px !important;
+.w5_modalWindow .container {
+	margin-top: 0px;
 }
 
-/* main style */
-.modalTitle {
+.w5_modalTitle {
 	font-size: 1.2rem;
 	margin-bottom: 5px;
 }
 
-.columnTitle {
+.w5_columnTitle {
 	text-align: center;
 	margin-bottom: 5px;
 }
 
-.itemsContainer {
+.w5_itemsContainer {
 	border: 2px solid black;
 	border-radius: 5px;
 	height: 280px;
 	overflow: auto;
 }
 
-.itemStyle {
+.w5_itemStyle {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -36,11 +34,19 @@ button {
 	font-size: 0.82rem;
 }
 
-.modalButtons {
+.w5_modalButtons {
 	display: flex;
 	justify-content: flex-end;
 }
 
-.modalScheduleButton {
+.w5_modalButtons button {
+	width: auto;
+}
+
+.w5_modalScheduleButton {
 	margin-left: 10px;
+}
+
+.w5_dateComponent button {
+	width: 15%;
 }
