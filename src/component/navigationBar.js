@@ -22,6 +22,9 @@ const NavigationBar = ({ isLoggedIn, setIsLoggedIn }) => {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item active">
+                        <Link className="nav-link" to="/userProfile">User Profile</Link>
+                    </li>
+                    <li className="nav-item active">
                         <Link className="nav-link" to="/tutor">Manage Tutor Times</Link><span className="sr-only">(current)</span>
                     </li>
                     <li className="nav-item active">

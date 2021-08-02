@@ -10,12 +10,12 @@ import TutorSubjectsAndTimes from '../tutorSubjectsAndTimes/TutorSubjectsAndTime
 const ManageMeetings = () => {
 
     const [pastMeetings, setPastMeetings] = useState([]);
-    // const [upcomingMeetings, setUpcomingMeetings] = useState([]); // TODO - implement upcoming meetings
+    const [upcomingMeetings, setUpcomingMeetings] = useState([]); // TODO - implement upcoming meetings
 
     useEffect(() => {
-        fetch(`http://localhost:9000/meetings/list?id=${localStorage.token}`).then((response) => response.json()).then(response => {
+        fetch(`https://fast-stream-40869.herokuapp.com/meetings/list?id=${localStorage.token}`).then((response) => response.json()).then(response => {
             setPastMeetings(response.data.pastMeetings);
-            // setUpcomingMeetings(response.data.upcomingMeetings); // TODO - implement upcoming meetings
+            setUpcomingMeetings(response.data.upcomingMeetings); // TODO - implement upcoming meetings
         })
     }, []);
 
@@ -71,13 +71,19 @@ const ManageMeetings = () => {
                     <div className="card">
                         <h5 className="card-header"><strong>Scheduled Meetings</strong></h5>
                         <div className="card-body">
-                            <h5 className="card-title">Grade 12 Geometry</h5>
-                            <p className="card-text">Prof. Czik</p>
+                        {upcomingMeetings.map(userMeeting => {
+                                return (
+                                    <div key={userMeeting.meeting.title}>
+                                        <h5 className="card-title">{userMeeting.meeting.title}</h5>
+                                        <p className="card-text">{`${userMeeting.participant.firstName}  ${userMeeting.participant.lastName}`}</p>
+
                             <Link to="../meeting">
                             <a href="#" class="btn btn-primary">Join Meeting</a>
                             </Link>
                             &nbsp;&nbsp;&nbsp;
-                   <a href="#" className="btn btn-danger">Cancel</a>
+                            <a href="#" className="btn btn-danger">Cancel</a>
+                        </div>)
+                        })}
                         </div>
                     </div>
                 </Col>
