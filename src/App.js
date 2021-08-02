@@ -11,7 +11,7 @@ import Meeting from './component/Meeting/meeting';
 
 //Rick
 import SignUpPage from './component/signUpPage/signUpPage';
-import ProtectedRoute from './component/protectedRoute'
+import ProtectedRoute from './component/protectedRoute';
 
 
 import LandingPage from './component/landingPage/landingPage';
@@ -58,7 +58,7 @@ const App = () => {
       <NavigationBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <Switch>
 
-        <Route exact path="/modal" render={() => (
+        <ProtectedRoute exact path="/modal" render={() => (
           <ModalTestPage handleError={handleError} />
         )} />
 

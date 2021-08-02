@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './signUpPage.css';
 import { Redirect, Link } from "react-router-dom";
+import {BASE_URL} from '../../constants';
 
 const SignUpPage = ({ isLoggedIn, setIsLoggedIn }) => {
 
@@ -23,7 +24,7 @@ const SignUpPage = ({ isLoggedIn, setIsLoggedIn }) => {
         }
 
 
-        fetch("http://localhost:9000/users/create", {
+        fetch(`${BASE_URL}users/create`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

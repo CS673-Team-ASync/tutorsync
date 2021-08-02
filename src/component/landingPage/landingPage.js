@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './landingPage.css';
 import { Redirect, Link } from "react-router-dom";
+import {BASE_URL} from '../../constants';
 
 const LandingPage = ({ isLoggedIn, setIsLoggedIn }) => {
     const [email, setEmail] = useState('');
@@ -14,7 +15,7 @@ const LandingPage = ({ isLoggedIn, setIsLoggedIn }) => {
             email,
             password
         }
-        fetch("http://localhost:9000/users/login", {
+        fetch(`${BASE_URL}users/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
