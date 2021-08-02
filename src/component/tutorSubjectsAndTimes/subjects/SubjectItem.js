@@ -14,20 +14,26 @@ const SubjectItem = (props) => {
   const { id, subject, description } = props.tutorSubject;
 
   return (
-    <div className='subjectItemContainer'>
-      <div className='subjectTitle'>
-        <div className='subjectTitleText'>
+    <div className='w5a_subjectItemContainer'>
+      <div className='w5a_subjectTitle'>
+        <div className='w5a_subjectTitleText'>
           {subject}
         </div>
         <BsXCircleFill
           id='deleteSubjectIcon'
-          style={{ color: 'red', cursor: 'pointer' }}
+          style={w5a_deleteSubjectIcon}
           onClick={() => deleteSubject(id)}
         />
       </div>
       <div>{description}</div>
     </div>
   )
+}
+
+const w5a_deleteSubjectIcon = {
+  color: '#FF0000', 
+  cursor: 'pointer',
+  flex: '0 0 1rem'
 }
 
 export default SubjectItem;

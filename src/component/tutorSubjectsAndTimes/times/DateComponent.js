@@ -15,17 +15,26 @@ import '../tutorSubjectsAndTimes.css';
 
 const DateComponent = (props) => {
 
-  const { changeSelectedDate } = props;
+  const {changeSelectedDate, datesToHighlight} = props;
 
   const currentDate = new Date();
   const [selectedDate, setSelectedDate] = useState(currentDate);
-  
 
+  const [highlightDates, setHighlightDates] = useState([]);
+
+  // selected date converted to a string
+  const selectedDateString = selectedDate.toISOString();
+
+  // pass a new date to parent component
   useEffect( () => {
-
-    // pass a new date to parent component
     changeSelectedDate(selectedDate);
-  }, [selectedDate, changeSelectedDate]);
+  // eslint-disable-next-line
+  }, [selectedDateString]); 
+  
+  // update highlighted dates
+  useEffect( () => {
+    setHighlightDates(datesToHighlight);
+  }, [datesToHighlight]);
 
   // on click of the calendar, change the selected date
   const onChange = (date) => {         
@@ -80,6 +89,13 @@ const DateComponent = (props) => {
 
   const moveMonthBack = () => {
 
+    // if the calendar is displaying the current month + year
+    // don't go to a previous date
+    if (currentDate.getMonth() === selectedDate.getMonth()
+      && currentDate.getFullYear() === selectedDate.getFullYear()) {
+      return;    
+    }
+
     // copy selected date
     let cloneDate = new Date(selectedDate);
     let month = cloneDate.getMonth();
@@ -104,34 +120,34 @@ const DateComponent = (props) => {
       // set the new date to the current date
       cloneDate = new Date(currentDate);
     }
-
+    
     // set the new selected date
     setSelectedDate(cloneDate);
   }
 
   // Returns true if date2 is later, false otherwise
-  function compareDates(date1, date2){
+  const compareDates = (date1, date2) => {
     return new Date(date2) > new Date(date1);
   }
 
   return (
     <>
-      <div className='dateComponentWrapper'> 
+      <div className='w5a_dateComponentWrapper'> 
         
         <div>
-          <div className='calendarTitleContainer'>
-            <div className='calendarTitle'>   
-              <div className='arrowLeft'>
+          <div className='w5a_calendarTitleContainer'>
+            <div className='w5a_calendarTitle'>   
+              <div className='w5a_arrowLeft'>
                 <BsArrowLeft
                   id='monthBackArrow'
                   style={arrowStyle}
                   onClick={moveMonthBack}
                 />
               </div> 
-              <div className='calendarText'>
+              <div className='w5a_calendarText'>
                 Calendar
               </div>
-              <div className='arrowRight'>
+              <div className='w5a_arrowRight'>
                 <BsArrowRight
                   id='monthForwardArrow'
                   style={arrowStyle}
@@ -150,6 +166,7 @@ const DateComponent = (props) => {
           peekNextMonth={false}
           monthsShown={1}
           inline
+          highlightDates={highlightDates}
         />
 
       </div>

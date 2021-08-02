@@ -1,6 +1,12 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
+import { Alert } from 'react-bootstrap';
 import SubjectItemList from './SubjectItemList';
 import SubjectInput from './SubjectInput';
+
+import getTutorSubjects from './actions/getTutorSubjects';
+import addTutorSubject from './actions/addTutorSubject';
+import deleteTutorSubject from './actions/deleteTutorSubject';
+
 import '../tutorSubjectsAndTimes.css';
 
 /*
@@ -11,69 +17,133 @@ import '../tutorSubjectsAndTimes.css';
   subjects list.  This component has 2 child components SubjectItemList
   and SubjectInput.
 
-  Props: userId, error 
-  This component will take the tutors userId as a prop.
+  Props: handleError 
   It will pass server errors up to App level state.
-
-  Desctiption of Code Not Currently Implemented:
-  1.  When this component loads, a GET request will be made to the server
-      to get the tutors subjects.  
-  2.  When a new subject is added by a tutor, a POST request will be
-      made to the server.
-  3.  When a subject is deleted by a tutor, a DELETE request will be
-      made to the server.
 */
 
+const ManageTutorSubjects = (props) => {
 
-const ManageTutorSubjects = () => {
+  const {handleError} = props;
 
-  // tutor subjects state, containing dummy data
-  const [tutorSubjects, setTutorSubjects] = useState(
-    [
-      {id: 1, 
-       subject: 'Grade 12 Algebra', 
-       description: 'I am available to provide tuition on Grade 10 - 12 Algebra.'
-      },
-      {id: 2, 
-       subject: 'Grade 12 Geometry', 
-       description: 'I am available to provide tuition on grade 10 - 12 Geometry.'
-      },
-    ]
-  );
+  // tutor subjects state
+  const [tutorSubjects, setTutorSubjects] = useState([]);
+
+  // state used by the Alert component to show messages
+  const [showAlert, setShowAlert] = useState(false);
+  const [messageText, setMessageText] = useState('');
+  const [messageType, setMessageType] = useState('info');
+
+
+  useEffect( () => {
+    const getSubjects = async () => {        
+      const result = await getTutorSubjects();  
+      const { error, msg, data, status } = result;
+      
+      // if there is an error, show a message, and pass the error to App level      
+      if (error) {
+        showMessage('Error Connecting to Server!', 'danger');
+        handleError({status: status, msg: msg});         
+        return;
+      } 
+      // convert the data
+      convertData(data.data);
+    }
+    getSubjects();
+  // eslint-disable-next-line
+  }, []);
+
+
+  // convert the data from the server
+  const convertData = (subjectData) => {
+
+    // get the subjects
+    const subjects = subjectData.subjects;
+
+    // map data to new format
+    const subjectsArray = subjects.map(item => {
+      return {
+        id: item._id,
+        subject: item.subject,
+        description: item.description
+      }
+    });
+
+    // update tutor subjects state
+    setTutorSubjects(subjectsArray); 
+  }
+
 
   // Function deletes a subject from the list of subjects.
-  const deleteSubject = (id) => {
+  const deleteSubject = async (subjectId) => {
+
+    const result = await deleteTutorSubject(subjectId);
+    const { error, msg, status } = result;
+    
+    // if there is an error, show a message, and pass the error to App level
+    if (error) {
+      showMessage('Error Connecting to Server!', 'danger');
+      handleError({status: status, msg: msg});         
+      return;
+    } 
 
     // filter using the subject id
     const filteredSubjects = 
-      tutorSubjects.filter(tutorSubject => tutorSubject.id !== id);
+      tutorSubjects.filter(tutorSubject => tutorSubject.id !== subjectId);
 
-    // update the tutorSubjects  
+    // update the tutorSubjects state 
     setTutorSubjects(filteredSubjects);
+
+    // show success message
+    showMessage('Subject deleted.', 'success');
   }
 
-  // Function adds a subject to the list of subjects.
-  const addNewSubject = (newSubject) => {
 
-    // Generate a dummy id for testing 
-    // The actual id will come from the database
-    newSubject.id = Math.floor(Math.random() * 1000);
+  // Function adds a subject to the list of subjects.
+  const addNewSubject = async (newSubject) => {
+
+    const result = await addTutorSubject(newSubject);
+    const { error, msg, data, status } = result;
+      
+    // if there is an error, show a message and pass the error to App level
+    if (error) {
+      showMessage('Error Connecting to Server!', 'danger');
+      handleError({status: status, msg: msg});         
+      return;
+    } 
     
-    // add to the tutor subjects 
-    const newTutorSubjects = [...tutorSubjects, newSubject];  
+    // convert returned data
+    const convertedSubject = {
+      id: data._id,
+      subject: data.name,
+      description: data.description
+    } 
+
+    // add new subject (including subject id), to the tutor subjects array 
+    const newTutorSubjects = [...tutorSubjects, convertedSubject];      
 
     // update the tutorSubjects state
     setTutorSubjects(newTutorSubjects);
+
+    // show success message
+    showMessage('Subject added.', 'success');
   }
 
-  // handle any errors from the subjectInput component.
-  const error = (err) => {
-    // handle input error
+
+  // show a message for 3 seconds 
+  const showMessage = (msgText, msgType) => {
+    // show a message 
+    setMessageText(msgText);
+    setMessageType(msgType);
+    setShowAlert(true);
+  
+    // hide the message after 3 seconds
+    setTimeout(() => setShowAlert(false), 3000);
   }
+
 
   return (    
-    <div className='subjectContainer'>
-      <div className='listHeading'>
+    <div className='w5a_subjectContainer'>
+      <div className='w5a_listHeading'>
         Tutor Subjects
       </div>  
       <SubjectItemList 
@@ -82,8 +152,17 @@ const ManageTutorSubjects = () => {
       />
       <SubjectInput 
         addNewSubject={addNewSubject}
-        error={error}
+        handleInputError={ (errObj) => showMessage(errObj.msg, 'info') }
       />
+      <div className='w5a_alertMessage'>
+        <Alert 
+          transition={false} 
+          show={showAlert} 
+          variant={messageType}
+        >
+          {messageText}
+        </Alert>  
+      </div>
     </div>
   )
 }

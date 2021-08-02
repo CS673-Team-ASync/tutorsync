@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import React from 'react';
+import { Button } from 'react-bootstrap';
 import '../tutorSubjectsAndTimes.css';
 
 /*
@@ -12,39 +13,76 @@ import '../tutorSubjectsAndTimes.css';
 
 const SubjectInput = (props) => {
 
-  const { addNewSubject, error } = props;   
+  const { addNewSubject, handleInputError } = props;   
 
-  const [newSubject, setNewSubject] = useState({
+  const [newSubject, setNewSubject] = React.useState({
     subject: '',
     description: '',
   });
 
-  // called when a input field is changed
+  // This function is called when a input field is changed
   const onChange = (e) => {
     setNewSubject({ ...newSubject, [e.target.name]: e.target.value }); 
   }
   
-  // called when the Add New Subject button is clicked
+  // This function is called when the Add New Subject button is clicked
   const onAddButtonClick = () => {
 
-    // check the validity of the two input fields
-    if (newSubject.subject === '' || newSubject.description === '') {
-
+    // Check if either input field is empty
+    if (isInputEmpty()) {
       // return an error message to the parent component
-      error({ msg: 'Please enter a valid Subject and Description'})
+      handleInputError(
+        { msg: 'Please enter a value for Subject and Description'});
       return;             
     }
 
+    // Check if either input field value is too long/large 
+    if (isInputTooLong()) {
+      // return an error message to the parent component
+      handleInputError(
+        { msg: 'Too many characters for Subject(max=100) or Description(max=250)'});
+      return; 
+    }
+
+    // trim the new subject  
+    const trimmedSubject = {
+      subject: newSubject.subject.trim(),
+      description: newSubject.description.trim()
+    }
+
     // add the new subject to the tutor subjects list
-    addNewSubject(newSubject);
+    addNewSubject(trimmedSubject);
 
     // clear the subject and description fields
     setNewSubject({ subject: '', description: '' });    
   }
 
+  // This function checks if either input field is empty
+  const isInputEmpty = () => {        
+    if ((newSubject.subject.trim().length === 0)
+        || (newSubject.description.trim().length === 0))
+    {
+      return true;
+    }    
+    return false;
+  }
+
+  // This function checks if either input field value is too long/large 
+  const isInputTooLong = () => {
+    const maxSubLength = 100;     // max subject length in characters
+    const maxDescLength = 250;    // max description length in characters
+
+    if (newSubject.subject.trim().length > maxSubLength
+      || newSubject.description.trim().length > maxDescLength)
+    {
+      return true;
+    }
+    return false;
+  }
+
   return (
     <div>
-      <div className="inputGroup">
+      <div className="w5a_inputGroup">
         <label htmlFor="subjectField">
           Subject
         </label>
@@ -56,7 +94,7 @@ const SubjectInput = (props) => {
           onChange={(e) => onChange(e)} 
         />
       </div>
-      <div className="inputGroup">
+      <div className="w5a_inputGroup">
         <label htmlFor="descriptionField">
           Subject Description
         </label>
@@ -68,13 +106,10 @@ const SubjectInput = (props) => {
           onChange={(e) => onChange(e)}
         />
       </div>      
-      <div className="buttonGroup">
-        <button 
-          className="inButton inButton-block inButton-blue"
-          onClick={onAddButtonClick}
-        >
+      <div className="w5a_addSubjectButton">
+        <Button onClick={onAddButtonClick} block>
           Add New Subject
-        </button>
+        </Button>
       </div>
     </div>
   )

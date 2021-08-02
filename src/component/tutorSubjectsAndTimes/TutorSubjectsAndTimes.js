@@ -1,5 +1,6 @@
 import ManageTutorSubjects from './subjects/ManageTutorSubjects';
 import ManageTutorTimes from './times/ManageTutorTimes';
+import { Container, Row, Col } from 'react-bootstrap';
 
 /*
   Name: TutorSubjectsAndTimes
@@ -9,22 +10,27 @@ import ManageTutorTimes from './times/ManageTutorTimes';
   using a Bootstrap container.  
 */
 
-const TutorSubjectsAndTimes = () => {
+const TutorSubjectsAndTimes = (props) => {
+
+  const {handleError} = props;
+
   return (
-    <div className='pageContainer'>
-
-      <div className='container-fluid'>
-        <div className='row rowContainer justify-content-around'>
-          <div className='col-5 colContainer'>
-            <ManageTutorSubjects />
-          </div>
-          <div className='col-5 colContainer'>
-            <ManageTutorTimes />
-          </div>
-        </div>  
-      </div>
-
-    </div>       
+    <div className='w5a_pageContainer'> 
+      <Container fluid>
+        <Row className="justify-content-sm-center">
+          <Col sm={5}>
+            <ManageTutorSubjects    
+              handleError={handleError}
+            />
+          </Col>
+          <Col sm={{ span:5, offset:1 }}>
+            <ManageTutorTimes     
+              handleError={handleError}
+            />
+          </Col>
+        </Row>
+      </Container>
+    </div>
   )
 }
 

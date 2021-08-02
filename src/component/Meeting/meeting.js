@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './meeting.css';
 import Sketch from 'react-p5'
 import { Button, ButtonGroup, Container, Row, Col } from 'react-bootstrap';
@@ -74,12 +74,12 @@ const Meeting = () => {
         </Col>
         <Col md={{ span: 10, offset: 0 }}>
           <div className='p5'>
-            <div class="chat-popup" id="myForm">
-              <form action="/action_page.php" class="form-container">
+            <div className="chat-popup" id="myForm">
+              <form action="/action_page.php" className="form-container">
 
                 <textarea placeholder="Type message.." name="msg" required></textarea>
 
-                <button type="submit" class="btn">Send</button>
+                <button type="submit" className="btn">Send</button>
               </form>
             </div>
           </div>
