@@ -1,7 +1,23 @@
 import React from 'react';
+import { useState } from "react";
 import './meeting.css';
 import Sketch from 'react-p5'
+import * as Y from "yjs";
+import { WebsocketProvider } from "y-websocket";
+import { bindProxyAndYMap } from "valtio-yjs";
+import { proxy, useSnapshot } from "valtio";
 import { Button, ButtonGroup, Container, Row, Col } from 'react-bootstrap';
+
+const ydoc = new Y.Doc();
+
+    const websocketProvider = new WebsocketProvider(
+    "wss://demos.yjs.dev",
+    "tutorsync-123",
+    ydoc
+    );
+
+    const ymap = ydoc.getMap("messages.v1");
+    const mesgMap = proxy({});
 
 const Meeting = () => {
 
@@ -17,9 +33,20 @@ const Meeting = () => {
     }
   }
 
+  bindProxyAndYMap(mesgMap, ymap);
+
 
   return <div className="container">
     <Container>
+      <h4>MeetingID: 123</h4>
+      <h4>My Username: username</h4>
+      <h4>Other Username: their_username</h4>
+      <h4>MeetingID: 123</h4>
+    {/* <h2>My Message</h2>
+    <MyMessage />
+    <h2>Messages</h2>
+    <Messages /> */}
+
       <Row>
         <Col md={{ span: 11, offset: 0 }}>&nbsp;</Col>
         <Col md={{ span: 5, offset: 2 }} block>
@@ -75,12 +102,15 @@ const Meeting = () => {
         <Col md={{ span: 10, offset: 0 }}>
           <div className='p5'>
             <div className="chat-popup" id="myForm">
-              <form action="/action_page.php" className="form-container">
+              {/* <form action="/action_page.php" className="form-container"> */}
 
-                <textarea placeholder="Type message.." name="msg" required></textarea>
+                {/* <textarea placeholder="Type message.." name="msg" required></textarea> */}
+                <Messages />
 
-                <button type="submit" className="btn">Send</button>
-              </form>
+                <MyMessage />
+
+                {/* <button type="submit" className="btn">Send</button> */}
+              {/* </form> */}
             </div>
           </div>
         </Col>
@@ -88,5 +118,47 @@ const Meeting = () => {
     </Container>
   </div>
 }
+
+const MyMessage = () => {
+  // const [name, setName] = useState("");
+  var d = new Date();
+ var n = d.toLocaleTimeString('en-US');
+  let name = "username"
+  const [message, setMessage] = useState("");
+  const send = () => {
+    if (name && message) {
+      mesgMap[name+"_"+n] = message;
+    }
+  };
+  return (
+    <div>
+      {/* <div>
+        Name: {name}
+     </div> */}
+     <div>
+       Message:{" "}
+       <input value={message} onChange={(e) => setMessage(e.target.value)} />
+     </div>
+     <button disabled={!name || !message} onClick={send}>
+       Send
+     </button>
+   </div>
+ );
+};
+
+const Messages = () => {
+ const snap = useSnapshot(mesgMap);
+ return (
+   <div style={{background: 'lightGrey', padding:"10px", borderRadius:"6px", margin:"14px", maxHeight:"300px", overflowX:"hidden" }}>
+     {Object.keys(snap)
+       .reverse()
+       .map((key) => (
+         <p key={key}>
+           {key}: {snap[key]}
+         </p>
+       ))}
+   </div>
+ );
+};
 
 export default Meeting
