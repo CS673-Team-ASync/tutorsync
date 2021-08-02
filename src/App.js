@@ -1,67 +1,112 @@
-import * as Y from "yjs";
-import { WebsocketProvider } from "y-websocket";
-import { bindProxyAndYMap } from "valtio-yjs";
-import { proxy, useSnapshot } from "valtio";
-import { useState } from "react";
+import './App.css';
 
-const ydoc = new Y.Doc();
+//Colum
+import TutorSubjectsAndTimes from './component/tutorSubjectsAndTimes/TutorSubjectsAndTimes';
 
-const websocketProvider = new WebsocketProvider(
-  "wss://demos.yjs.dev",
-  "valtio-yjs-demo",
-  ydoc
-);
+//Colum - Page to test the scheduled meeting modal with the Express server.
+import ModalTestPage from './component/scheduleMeetingModal/ModalTestPage';
 
-const ymap = ydoc.getMap("messages.v1");
-const mesgMap = proxy({});
-bindProxyAndYMap(mesgMap, ymap);
+//Luke
+import Meeting from './component/Meeting/meeting';
 
-const MyMessage = () => {
-  const [name, setName] = useState("");
-  const [message, setMessage] = useState("");
-  const send = () => {
-    if (name && message) {
-      mesgMap[name] = message;
+//Rick
+import SignUpPage from './component/signUpPage/signUpPage';
+import ProtectedRoute from './component/protectedRoute'
+
+
+import LandingPage from './component/landingPage/landingPage';
+
+//Tuoyang
+import ManageMeetings from './component/ManageMeetings/ManageMeetings'
+import UserProfile from './component/userProfile/userProfile';
+
+//Yi-Chun
+import SearchPage from './component/SearchPage/SearchPage';
+
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import NavigationBar from './component/navigationBar';
+import { useEffect, useState } from 'react'
+
+const App = () => {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setIsLoggedIn(true)
+    } else {
+      setIsLoggedIn(false)
     }
-  };
-  return (
-    <div>
-      <div>
-        Name: <input value={name} onChange={(e) => setName(e.target.value)} />
-      </div>
-      <div>
-        Message:{" "}
-        <input value={message} onChange={(e) => setMessage(e.target.value)} />
-      </div>
-      <button disabled={!name || !message} onClick={send}>
-        Send
-      </button>
-    </div>
-  );
-};
+  }, [])
 
-const Messages = () => {
-  const snap = useSnapshot(mesgMap);
-  return (
-    <div>
-      {Object.keys(snap)
-        .reverse()
-        .map((key) => (
-          <p key={key}>
-            {key}: {snap[key]}
-          </p>
-        ))}
-    </div>
-  );
-};
+  const handleError = (errorObj) => {                
+    if(errorObj.status) {
+      console.log(`Status: ${errorObj.status}`);
+    }
+    if(errorObj.msg) {
+      console.log(`Message: ${errorObj.msg}`);
+    } 
+  }   
 
-const App = () => (
-  <div>
-    <h2>My Message</h2>
-    <MyMessage />
-    <h2>Messages</h2>
-    <Messages />
-  </div>
-);
+  return (
+    <Router>
+      <NavigationBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      <Switch>
+
+        <Route exact path="/modal" render={() => (
+          <ModalTestPage handleError={handleError} />
+        )} />
+
+        <ProtectedRoute
+          exact
+          path="/Meeting"
+          component={Meeting}
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+        />
+        <ProtectedRoute
+          exact
+          path="/"
+          component={SearchPage}
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+        />
+        <ProtectedRoute
+          exact
+          path="/manageMeetings"
+          component={ManageMeetings}
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+        />
+        <ProtectedRoute
+          exact
+          path="/userProfile"
+          component={UserProfile}
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+        />
+        <ProtectedRoute
+          exact
+          path="/tutor"
+          component={TutorSubjectsAndTimes}
+          handleError={handleError}
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+        />
+        <Route exact path="/landing" render={() => (
+          <LandingPage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        )} />
+        <Route exact path="/signUp" render={() => (
+          <SignUpPage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        )} />
+      </Switch>
+    </Router>
+  );
+}
 
 export default App;
