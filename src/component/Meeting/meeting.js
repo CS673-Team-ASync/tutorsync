@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from "react";
 import './meeting.css';
-import Sketch from 'react-p5'
+import Sketch from 'react-p5-wrapper'
 import * as Y from "yjs";
 import { WebsocketProvider } from "y-websocket";
 import { bindProxyAndYMap } from "valtio-yjs";
