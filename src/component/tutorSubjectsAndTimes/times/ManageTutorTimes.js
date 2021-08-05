@@ -16,13 +16,11 @@ import '../tutorSubjectsAndTimes.css';
   This component allows tutors to add available dates and times to 
   their schedule.
 
-  Props: error 
-  It will pass server errors up to App level state.
+  This component has 4 child components DateComponent, TimeComponent,
+  AvailableTimeList and DurationComponent.
 */
 
-const ManageTutorTimes = (props) => {
-
-  const {handleError} = props;
+const ManageTutorTimes = () => {
 
   // the tutor availability
   const [tutorAvailability, setTutorAvailability] = useState([]); 
@@ -58,7 +56,7 @@ const ManageTutorTimes = (props) => {
       const result = await getTutorAvailability();    
       const { error, msg, data, status } = result;   
       
-      // if there is an error, show a message and pass the error to App level
+      // if there is an error, show a message and send to console
       if (error) {
         showMessage('Error Connecting to Server!', 'danger');
         handleError({status: status, msg: msg});      
@@ -97,7 +95,7 @@ const ManageTutorTimes = (props) => {
   }, [tutorAvailability]);
 
 
-  // Convert the ISO8601 time string in each object to a date object.
+  // Convert the time string in each object to a date object.
   // Filter out any time slots that have a start time before the current time. 
   const convertData = (timeStringArray) => {
 
@@ -154,7 +152,7 @@ const ManageTutorTimes = (props) => {
     const result = await deleteTutorTimeSlot(timeSlotId);    
     const { error, msg, status } = result;   
     
-    // if there is an error, show a message and pass the error to App level
+    // if there is an error, show a message and send to console
     if (error) {
       showMessage('Error Connecting to Server!', 'danger');
       handleError({status: status, msg: msg});      
@@ -215,7 +213,7 @@ const ManageTutorTimes = (props) => {
     const result = await addTutorTimeSlot(newTimeSlot);    
     const {error, msg, data, status} = result; 
     
-    // if there is an error, show a message and pass the error to App level
+    // if there is an error, show a message and send to console
     if (error) {
       showMessage('Error Connecting to Server!', 'danger');
       handleError({status: status, msg: msg});      
@@ -240,6 +238,17 @@ const ManageTutorTimes = (props) => {
     // show a success message to the user
     showMessage('Time slot added', 'success');
   }
+
+
+  // send error to console
+  const handleError = (errorObj) => {                
+    if(errorObj.status) {
+      console.log(`Status: ${errorObj.status}`);
+    }
+    if(errorObj.msg) {
+      console.log(`Message: ${errorObj.msg}`);
+    } 
+  }  
 
 
   return (

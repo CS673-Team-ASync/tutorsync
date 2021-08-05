@@ -44,23 +44,19 @@ const App = () => {
     }
   }, [])
 
-  const handleError = (errorObj) => {                
-    if(errorObj.status) {
-      console.log(`Status: ${errorObj.status}`);
-    }
-    if(errorObj.msg) {
-      console.log(`Message: ${errorObj.msg}`);
-    } 
-  }   
-
+  
   return (
     <Router>
       <NavigationBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <Switch>
 
-        <ProtectedRoute exact path="/modal" render={() => (
-          <ModalTestPage handleError={handleError} />
-        )} />
+        <ProtectedRoute 
+          exact 
+          path="/modal" 
+          component={ModalTestPage}
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+        />
 
         <ProtectedRoute
           exact
@@ -94,7 +90,6 @@ const App = () => {
           exact
           path="/tutor"
           component={TutorSubjectsAndTimes}
-          handleError={handleError}
           isLoggedIn={isLoggedIn}
           setIsLoggedIn={setIsLoggedIn}
         />

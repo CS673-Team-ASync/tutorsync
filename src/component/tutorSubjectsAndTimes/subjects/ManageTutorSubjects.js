@@ -16,14 +16,9 @@ import '../tutorSubjectsAndTimes.css';
   This component adds to, deletes from, and displays the tutors 
   subjects list.  This component has 2 child components SubjectItemList
   and SubjectInput.
-
-  Props: handleError 
-  It will pass server errors up to App level state.
 */
 
-const ManageTutorSubjects = (props) => {
-
-  const {handleError} = props;
+const ManageTutorSubjects = () => {
 
   // tutor subjects state
   const [tutorSubjects, setTutorSubjects] = useState([]);
@@ -39,7 +34,7 @@ const ManageTutorSubjects = (props) => {
       const result = await getTutorSubjects();  
       const { error, msg, data, status } = result;
       
-      // if there is an error, show a message, and pass the error to App level      
+      // if there is an error, show a message, and send to console      
       if (error) {
         showMessage('Error Connecting to Server!', 'danger');
         handleError({status: status, msg: msg});         
@@ -79,7 +74,7 @@ const ManageTutorSubjects = (props) => {
     const result = await deleteTutorSubject(subjectId);
     const { error, msg, status } = result;
     
-    // if there is an error, show a message, and pass the error to App level
+    // if there is an error, show a message, and send to console
     if (error) {
       showMessage('Error Connecting to Server!', 'danger');
       handleError({status: status, msg: msg});         
@@ -104,7 +99,7 @@ const ManageTutorSubjects = (props) => {
     const result = await addTutorSubject(newSubject);
     const { error, msg, data, status } = result;
       
-    // if there is an error, show a message and pass the error to App level
+    // if there is an error, show a message and send to console
     if (error) {
       showMessage('Error Connecting to Server!', 'danger');
       handleError({status: status, msg: msg});         
@@ -139,6 +134,17 @@ const ManageTutorSubjects = (props) => {
     // hide the message after 3 seconds
     setTimeout(() => setShowAlert(false), 3000);
   }
+
+
+  // send errors to the console
+  const handleError = (errorObj) => {                
+    if(errorObj.status) {
+      console.log(`Status: ${errorObj.status}`);
+    }
+    if(errorObj.msg) {
+      console.log(`Message: ${errorObj.msg}`);
+    } 
+  }  
 
 
   return (    
