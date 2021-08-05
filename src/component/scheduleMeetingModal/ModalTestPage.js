@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {Button} from 'react-bootstrap';
 import ModalWindow from './ModalWindow';
 
@@ -9,32 +9,35 @@ import ModalWindow from './ModalWindow';
   This component (ModalTestPage), can launch the ModalWindow
   to test and connect the ModalWindow component to the server.
   
-  It has dummy values for userId, tutorId, subjectId, tutorSubjectTitle
-  and tutorName. 
+  It has dummy values for userId, tutorId, subjectTitle, 
+  subjectDescription and tutorName. 
   
   In the working version of the App, the Modal window will be 
   launched by the Search page.  It will supply values for 
-  userId, tutorId, subjectTitle, subjectDescription and tutorName.  
-  It will also have the component state, shown below, 
-  to hide or show the modal window.    
+  userId, tutorId, subjectTitle, subjectDescription and tutorName.      
 */
 
-const ModalTestPage = (props) => {  
-
-  // pass error to parent component
-  const {handleError} = props;
+const ModalTestPage = () => {  
 
   // state to hide or show the modal window
   const [modalShow, setModalShow] = useState(false);
   const showModal = () => setModalShow(true);
   const hideModal = () => setModalShow(false);  
 
-  // dummy values
-  const userId = "60ff3b354f07b26d302b2583";  // id of the current user
-  const tutorId = "60ff3b354f07b26d302b2580"; // id of the tutor selected by the user
-  const subjectTitle = 'Algebra';             // id of the subject selected by the user
-  const subjectDescription = 'Algebra Desc';  // title of subject selected by the user
-  const tutorName = 'Tuoyang';                // name of tutor selected by the user 
+  // state used to update the ModalWindow component
+  const [userId, setUserId] = useState('');
+  const [tutorId, setTutorId] = useState('');
+  const [subjectTitle, setSubjectTitle] = useState('');  
+  const [subjectDescription, setSubjectDescription] = useState('');            
+  const [tutorName, setTutorName] = useState('');
+
+  useEffect(() => {
+    setUserId('60ff3b354f07b26d302b2583');
+    setTutorId('60ff3b354f07b26d302b2580');
+    setSubjectTitle('Algebra');
+    setSubjectDescription('Algebra Desc');
+    setTutorName('Bill Burr');
+  }, []);
 
   return (
     <>
@@ -50,9 +53,7 @@ const ModalTestPage = (props) => {
         subjectTitle={subjectTitle}
         subjectDescription={subjectDescription}
         tutorName={tutorName}
-        handleError={handleError}     
       />
-
     </>
   )
 }

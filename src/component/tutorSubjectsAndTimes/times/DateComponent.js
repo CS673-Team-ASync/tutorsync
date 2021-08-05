@@ -158,7 +158,7 @@ const DateComponent = (props) => {
           </div>
         </div>
         <DatePicker      
-          wrapperClassName="datepicker"
+          wrapperClassName="w5a_datepicker"
           selected={selectedDate}          
           onChange={(date) => onChange(date)}
           minDate={currentDate}
