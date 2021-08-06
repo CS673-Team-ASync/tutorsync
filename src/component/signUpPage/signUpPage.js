@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './signUpPage.css';
 import { Redirect, Link } from "react-router-dom";
-import {BASE_URL} from '../../constants';
+import { BASE_URL } from '../../constants';
 
 const SignUpPage = ({ isLoggedIn, setIsLoggedIn }) => {
 
@@ -11,6 +11,7 @@ const SignUpPage = ({ isLoggedIn, setIsLoggedIn }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleOnSubmit = (e) => {
         // preventing from our default form submission, because we will let React handle this
@@ -21,6 +22,11 @@ const SignUpPage = ({ isLoggedIn, setIsLoggedIn }) => {
             email,
             password,
             confirmPassword
+        }
+
+        if (firstName === "" || lastName === "" || email === "" || password === "" || confirmPassword === "") {
+            setErrorMessage("Please fill out all fields in the form!");
+            return;
         }
 
 
@@ -60,9 +66,10 @@ const SignUpPage = ({ isLoggedIn, setIsLoggedIn }) => {
                     <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} /><br />
                     <label>Confirm Password</label><br />
                     <input type="password" placeholder="Confirm password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} /><br /><br />
-                    <button className="button" onClick={handleOnSubmit}>Submit</button>
+                    <button id="signUpButton" className="button" onClick={handleOnSubmit}>Submit</button>
                 </form>
                 <div className="signInText">Already have an account? Sign in <Link to="/landing">here!</Link></div>
+                {errorMessage ? <div className="errorMessage">{errorMessage}</div> : null}
             </div>
         </div>)
     )
