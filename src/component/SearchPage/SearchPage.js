@@ -8,16 +8,17 @@ const SearchPage = () => {
     const [subjectInput, setSubjectInput] = useState('')
     const [tutors, setTutors] = useState([])
     const [showModal, setShowModal] = useState(false)
+    // setting the current parameters to send to the schedule meeting window
+    const [currentSubjectDescription, setCurrentSubjectDescription] = useState('')
+    const [currentTutorId, setCurrentTutorId] = useState('')
+    const [currentSubjectTitle, setCurrentSubjectTitle] = useState('')
+    const [currentTutorName, setCurrentTutorName] = useState('')
+
+    // custom logic passed down to close modal
     const hideModal = () => {
         setShowModal(false)
     }
-    const [currentSubjectDescription, setCurrentSubjectDescription] = useState('')
-    const [currentTutorId, setCurrentTutorId] = useState('')
 
-
-    /** studentId, tutorId, subjectTitle,
-        subjectDescription, tutorName
-*/
     const handleSearchSubmit = () => {
         fetch(`${BASE_URL}subjects/list?id=${localStorage.token}&subject=${subjectInput}`).then((response) => response.json()).then(response => {
             console.log(response.data.subjects)
@@ -41,13 +42,23 @@ const SearchPage = () => {
                                 setShowModal(true)
                                 setCurrentSubjectDescription(tutor.description)
                                 setCurrentTutorId(tutor.user._id)
+                                setCurrentSubjectTitle(tutor.subject)
+                                setCurrentTutorName(`${tutor.user.firstName} ${tutor.user.lastName}`)
                             }}>Check Availability</a>
                         </div>
                     )
                 })}
             </div>
 
-            {<ModalWindow modalShow={showModal} hideModal={hideModal} currentSubjectDescription={currentSubjectDescription} tutorId={currentTutorId} />}
+            {<ModalWindow
+                modalShow={showModal}
+                hideModal={hideModal}
+                subjectDescription={currentSubjectDescription}
+                tutorId={currentTutorId}
+                subjectTitle={currentSubjectTitle}
+                tutorName={currentTutorName}
+                studentId={localStorage.token}
+            />}
             <div className="search2">
                 <p>
                     <label htmlFor="subject-search">Search for Subject</label>
@@ -58,6 +69,7 @@ const SearchPage = () => {
                     Availability (days)
                     </p>
 
+                {/* TODO: Add Filtering By Days In Advance - Need to filter values */}
                 <li className="search4">1 - 7</li>
                 <li className="search4">1 - 14</li>
                 <li className="search4">1 - 28</li>
