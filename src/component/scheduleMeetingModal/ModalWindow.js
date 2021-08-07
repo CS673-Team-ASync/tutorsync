@@ -68,13 +68,13 @@ const ModalWindow = (props) => {
       convertData(data.data);
     }
 
-    // when the modal opens, get the tutor availability data
-    if (modalShow === true) {
+    // when the tutorId gets updated, get the tutor availability data
+    if (tutorId !== '') {       
       getAvailability();
     }
     // eslint-disable-next-line
-  }, [modalShow]);
-
+  }, [tutorId]); 
+  
 
   // update, when the tutor availability, or the date selected in calendar changes
   useEffect(() => {
