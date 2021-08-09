@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./SearchPage.css";
 import { BASE_URL } from '../../constants';
 import ModalWindow from '../scheduleMeetingModal/ModalWindow'
+import { Container, Row, Col } from 'react-bootstrap';
 
 const SearchPage = () => {
 
@@ -26,57 +27,66 @@ const SearchPage = () => {
         })
     }
 
-    return <div>
-        <div className="search1">
-            <h1>
-                Search for Tutors
-                </h1>
-            <div className="search3">
-                {tutors.map(tutor => {
-                    return (
-                        <div key={tutor._id}>
-                            {tutor.subject}<br />
-                            {tutor.description}<br />
-                            {`${tutor.user.firstName} ${tutor.user.lastName}`}<br />
-                            <a onClick={() => {
-                                setShowModal(true)
-                                setCurrentSubjectDescription(tutor.description)
-                                setCurrentTutorId(tutor.user._id)
-                                setCurrentSubjectTitle(tutor.subject)
-                                setCurrentTutorName(`${tutor.user.firstName} ${tutor.user.lastName}`)
-                            }}>Check Availability</a>
-                        </div>
-                    )
-                })}
-            </div>
+    return <div className="container">
+        <Container>
+            
+            <Row>
+                <h1><b>Search for Tutors</b></h1>
+            </Row>
+            
+            <br></br>
 
-            {<ModalWindow
-                modalShow={showModal}
-                hideModal={hideModal}
-                subjectDescription={currentSubjectDescription}
-                tutorId={currentTutorId}
-                subjectTitle={currentSubjectTitle}
-                tutorName={currentTutorName}
-                studentId={localStorage.token}
-            />}
-            <div className="search2">
-                <p>
-                    <label htmlFor="subject-search">Search for Subject</label>
-                </p>
-                <input type="text" id="subject" name="subject" value={subjectInput} onChange={e => setSubjectInput(e.target.value)} aria-label="Search through site content"></input>
-                <button onClick={handleSearchSubmit}>Search For Tutors</button>
-                <p>
-                    Availability (days)
-                    </p>
+            <Row>
+                <Col sm={12} md={5} lg={5}>
+                    <div className="showbox">
+                        {tutors.map(tutor => {
+                            return (
+                                <>
+                                <div className="tutorbox">
+                                    <div key={tutor._id}>
+                                        {tutor.subject}<br />
+                                        {tutor.description}<br />
+                                        {`${tutor.user.firstName} ${tutor.user.lastName}`}<br />
+                                        <a className="availabilty" onClick={() => {
+                                            setShowModal(true)
+                                            setCurrentSubjectDescription(tutor.description)
+                                            setCurrentTutorId(tutor.user._id)
+                                            setCurrentSubjectTitle(tutor.subject)
+                                            setCurrentTutorName(`${tutor.user.firstName} ${tutor.user.lastName}`)
+                                        }}>Check Availability</a>
+                                    </div>
+                                </div>
+                                <br/>
+                                </>
+                            )
+                    
+                        })}
+                
+                    </div>
+                </Col>
 
-                {/* TODO: Add Filtering By Days In Advance - Need to filter values */}
-                <li className="search4">1 - 7</li>
-                <li className="search4">1 - 14</li>
-                <li className="search4">1 - 28</li>
+                {<ModalWindow
+                    modalShow={showModal}
+                    hideModal={hideModal}
+                    subjectDescription={currentSubjectDescription}
+                    tutorId={currentTutorId}
+                    subjectTitle={currentSubjectTitle}
+                    tutorName={currentTutorName}
+                    studentId={localStorage.token}
+                />}
+            
+                <Col sm={12} md={5} lg={5}>
+                    <div className="search">
+                        <h5>
+                            <label htmlFor="subject-search"><b>Search for Subject</b></label>
+                        </h5>
+                        <input type="text" id="subject" name="subject" value={subjectInput} onChange={e => setSubjectInput(e.target.value)} aria-label="Search through site content"></input>
+                        <button onClick={handleSearchSubmit}>Search For Tutors</button>
+                    </div>
+                </Col>
+            </Row>
 
-
-            </div>
-        </div>
+        </Container>
 
     </div>
 }
