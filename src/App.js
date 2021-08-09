@@ -3,9 +3,6 @@ import './App.css';
 //Colum
 import TutorSubjectsAndTimes from './component/tutorSubjectsAndTimes/TutorSubjectsAndTimes';
 
-//Colum - Page to test the scheduled meeting modal with the Express server.
-import ModalTestPage from './component/scheduleMeetingModal/ModalTestPage';
-
 //Luke
 import Meeting from './component/Meeting/meeting';
 
@@ -49,14 +46,6 @@ const App = () => {
     <Router>
       <NavigationBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <Switch>
-
-        <ProtectedRoute 
-          exact 
-          path="/modal" 
-          component={ModalTestPage}
-          isLoggedIn={isLoggedIn}
-          setIsLoggedIn={setIsLoggedIn}
-        />
 
         <ProtectedRoute
           exact

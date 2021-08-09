@@ -35,9 +35,6 @@ const NavigationBar = ({ isLoggedIn, setIsLoggedIn }) => {
                     <li className="nav-item active">
                         <Link className="nav-link" to="/meeting">Go To Meeting</Link>
                     </li>
-                    <li className="nav-item active">
-                        <Link className="nav-link" to="/modal">Modal</Link>
-                    </li>
                 </ul>
                 <form className="form-inline my-2 my-lg-0">
                     <button type="button" onClick={handleSignOut} className="form-control mr-sm-2">Sign Out</button>

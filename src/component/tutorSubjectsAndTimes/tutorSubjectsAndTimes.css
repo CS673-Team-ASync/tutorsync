@@ -11,6 +11,14 @@
 	margin-top: 0px;
 }
 
+/* Duration Radio Buttons */
+#duration-inline-radio-1,
+#duration-inline-radio-2,
+#duration-inline-radio-3,
+#duration-inline-radio-4 {
+	visibility: visible;
+}
+
 /* Calendar CSS */
 .w5a_calendarTitleContainer {
 	display: inline-block;
