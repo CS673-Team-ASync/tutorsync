@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 import { Button, ButtonGroup, Container, ListGroup, Row, Col, Figure, Form } from 'react-bootstrap';
 import './userProfile.css';
@@ -7,6 +7,16 @@ import SearchPage from '../SearchPage/SearchPage';
 import TutorSubjectsAndTimes from '../tutorSubjectsAndTimes/TutorSubjectsAndTimes';
 
 const UserProfile = () => {
+
+  const [subjects, setSubjects] = useState([]);
+
+
+  useEffect(() => {
+      fetch(`https://fast-stream-40869.herokuapp.com/subjects/list/${localStorage.token}`).then((response) => response.json()).then(response => {
+      setSubjects(response.data.subjects);
+
+      })
+  }, []);
 
     return <div className="container">
 
@@ -73,11 +83,9 @@ const UserProfile = () => {
       <Col>
       <h4><b>Active Subjects</b></h4>
       <ListGroup>
-        <ListGroup.Item>Cras justo odio</ListGroup.Item>
-        <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-        <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-        <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
-        <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+        {subjects.map(subject => {
+          return (<ListGroup.Item>{subject.subject}-{subject.description}</ListGroup.Item>)
+        })}
         </ListGroup>
       </Col>
 

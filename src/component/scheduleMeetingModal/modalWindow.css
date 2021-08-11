@@ -19,7 +19,7 @@
 .w5_itemsContainer {
 	border: 2px solid black;
 	border-radius: 5px;
-	height: 280px;
+	height: 80px;
 	overflow: auto;
 }
 
@@ -49,4 +49,11 @@
 
 .w5_dateComponent button {
 	width: 15%;
+}
+
+/* gets triggered at 576px (sm) and above */
+@media screen and (min-width: 576px) {
+	.w5_itemsContainer {
+		height: 280px;
+	}
 }

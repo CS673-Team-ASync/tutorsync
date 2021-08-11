@@ -3,9 +3,6 @@ import './App.css';
 //Colum
 import TutorSubjectsAndTimes from './component/tutorSubjectsAndTimes/TutorSubjectsAndTimes';
 
-//Colum - Page to test the scheduled meeting modal with the Express server.
-import ModalTestPage from './component/scheduleMeetingModal/ModalTestPage';
-
 //Luke
 import Meeting from './component/Meeting/meeting';
 
@@ -44,23 +41,11 @@ const App = () => {
     }
   }, [])
 
-  const handleError = (errorObj) => {                
-    if(errorObj.status) {
-      console.log(`Status: ${errorObj.status}`);
-    }
-    if(errorObj.msg) {
-      console.log(`Message: ${errorObj.msg}`);
-    } 
-  }   
-
+  
   return (
     <Router>
       <NavigationBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <Switch>
-
-        <ProtectedRoute exact path="/modal" render={() => (
-          <ModalTestPage handleError={handleError} />
-        )} />
 
         <ProtectedRoute
           exact
@@ -94,7 +79,6 @@ const App = () => {
           exact
           path="/tutor"
           component={TutorSubjectsAndTimes}
-          handleError={handleError}
           isLoggedIn={isLoggedIn}
           setIsLoggedIn={setIsLoggedIn}
         />

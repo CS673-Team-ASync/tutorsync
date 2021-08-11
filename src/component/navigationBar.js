@@ -3,9 +3,10 @@ import {
     Link
 } from "react-router-dom";
 
-
+import Logo from './tutorsynclogo.png';
 
 const NavigationBar = ({ isLoggedIn, setIsLoggedIn }) => {
+
 
     const handleSignOut = () => {
         localStorage.removeItem('token')
@@ -13,8 +14,9 @@ const NavigationBar = ({ isLoggedIn, setIsLoggedIn }) => {
     }
 
     return isLoggedIn ? (
+
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-            <Link className="navbar-brand" to="/">TutorSync</Link>
+            <Link className="navbar-brand" to="/"> <img src={Logo} alt="" width="200" height="40"/></Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
@@ -40,7 +42,7 @@ const NavigationBar = ({ isLoggedIn, setIsLoggedIn }) => {
             </div>
         </nav>
     ) : (<nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-        <Link className="navbar-brand" to="/">TutorSync</Link>
+        <Link className="navbar-brand" to="/"><img src={Logo} alt="" width="200" height="40"/></Link>
     </nav>)
 }
 

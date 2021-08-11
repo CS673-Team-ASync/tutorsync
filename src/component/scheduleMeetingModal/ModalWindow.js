@@ -15,20 +15,18 @@ import './modalWindow.css';
   This component allows the user to select a date, and a time slot/period
   to schedule a meeting.
 
-  Props: modalShow, studentId, tutorId, subjectId, tutorSubjectTitle, tutorName
+  Props: modalShow, studentId, tutorId, subjectTitle, 
+         subjectDescription, tutorName
   These props have values assigned in the parent component.  
   
   Props: hideModal
   This prop causes the modal window to close.   
-
-  Props: handleError
-  This prop allows server errors to be passed to the parent component.
 */
 
 const ModalWindow = (props) => {
 
   const {modalShow, hideModal, studentId, tutorId, subjectTitle,
-        subjectDescription, tutorName, handleError} = props;
+        subjectDescription, tutorName} = props;
 
   // the tutor availability
   const [tutorAvailability, setTutorAvailability] = useState([]); 
@@ -60,7 +58,7 @@ const ModalWindow = (props) => {
       const result = await getTutorAvailability(tutorId);    
       const { error, msg, data, status } = result;   
       
-      // if there is an error, show a message and pass the error to App level
+      // if there is an error, show a message and send to console
       if (error) {
         showMessage('Error Connecting to Server!', 'danger');
         handleError({status: status, msg: msg});      
@@ -70,13 +68,13 @@ const ModalWindow = (props) => {
       convertData(data.data);
     }
 
-    // when the modal opens, get the tutor availability data
-    if (modalShow === true) {
+    // when the tutorId gets updated, get the tutor availability data
+    if (tutorId !== '') {       
       getAvailability();
     }
     // eslint-disable-next-line
-  }, [modalShow]);
-
+  }, [tutorId]); 
+  
 
   // update, when the tutor availability, or the date selected in calendar changes
   useEffect(() => {
@@ -102,7 +100,7 @@ const ModalWindow = (props) => {
   }, [tutorAvailability]);
 
 
-  // Convert the ISO8601 time string in each object to a date object.
+  // Convert the time string in each object to a date object.
   // Filter out any time slots that have a start time before the current time. 
   const convertData = (timeStringArray) => {
 
@@ -191,6 +189,17 @@ const ModalWindow = (props) => {
   }
 
 
+  // send the error to the console
+  const handleError = (errorObj) => {                
+    if(errorObj.status) {
+      console.log(`Status: ${errorObj.status}`);
+    }
+    if(errorObj.msg) {
+      console.log(`Message: ${errorObj.msg}`);
+    } 
+  }  
+
+
   return (
     <>
       <Modal 
@@ -226,7 +235,7 @@ const ModalWindow = (props) => {
         <Modal.Body>  
           <Container>
             <Row>
-              <Col xs={7} sm={7}>
+              <Col xs={12} sm={7}>
                 <div className="w5_columnTitle">Available Dates</div>
                 <div className="w5_dateComponent">
                   <DateComponent 
@@ -235,7 +244,7 @@ const ModalWindow = (props) => {
                   />
                 </div>
               </Col>
-              <Col xs={5} sm={5}>                
+              <Col xs={12} sm={5}>                
                 <div>
                   <div className="w5_columnTitle">
                     Available Times
@@ -292,8 +301,7 @@ ModalWindow.propTypes = {
   tutorId: PropTypes.string.isRequired,
   subjectTitle: PropTypes.string.isRequired,
   subjectDescription: PropTypes.string.isRequired,
-  tutorName: PropTypes.string.isRequired,
-  handleError: PropTypes.func.isRequired,
+  tutorName: PropTypes.string.isRequired
 }
 
 export default ModalWindow;
