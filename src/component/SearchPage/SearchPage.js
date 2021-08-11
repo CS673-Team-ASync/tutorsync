@@ -28,40 +28,46 @@ const SearchPage = () => {
     }
 
     return <div className="container">
-        <Container>
-            
+        <Container fluid>
+
             <Row>
                 <h1><b>Search for Tutors</b></h1>
             </Row>
-            
+
             <br></br>
 
             <Row>
+
                 <Col sm={12} md={5} lg={5}>
+
                     <div className="showbox">
                         {tutors.map(tutor => {
                             return (
-                                <>
-                                <div className="tutorbox">
-                                    <div key={tutor._id}>
-                                        {tutor.subject}<br />
-                                        {tutor.description}<br />
-                                        {`${tutor.user.firstName} ${tutor.user.lastName}`}<br />
-                                        <a className="availabilty" onClick={() => {
-                                            setShowModal(true)
-                                            setCurrentSubjectDescription(tutor.description)
-                                            setCurrentTutorId(tutor.user._id)
-                                            setCurrentSubjectTitle(tutor.subject)
-                                            setCurrentTutorName(`${tutor.user.firstName} ${tutor.user.lastName}`)
-                                        }}>Check Availability</a>
-                                    </div>
-                                </div>
-                                <br/>
-                                </>
+
+                                <Row>
+                                    <Col>
+                                        <div className="tutorbox">
+                                            <div key={tutor._id}>
+                                                {tutor.subject}<br />
+                                                {tutor.description}<br />
+                                                {`${tutor.user.firstName} ${tutor.user.lastName}`}<br />
+                                                <a className="availabilty" onClick={() => {
+                                                    setShowModal(true)
+                                                    setCurrentSubjectDescription(tutor.description)
+                                                    setCurrentTutorId(tutor.user._id)
+                                                    setCurrentSubjectTitle(tutor.subject)
+                                                    setCurrentTutorName(`${tutor.user.firstName} ${tutor.user.lastName}`)
+                                                }}>Check Availability</a>
+                                            </div>
+                                        </div>
+                                        <br />
+                                    </Col>
+                                </Row>
+
                             )
-                    
+
                         })}
-                
+
                     </div>
                 </Col>
 
@@ -74,7 +80,7 @@ const SearchPage = () => {
                     tutorName={currentTutorName}
                     studentId={localStorage.token}
                 />}
-            
+
                 <Col sm={12} md={5} lg={5}>
                     <div className="search">
                         <h5>
