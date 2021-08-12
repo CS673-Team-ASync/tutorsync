@@ -25,6 +25,7 @@ let meetingID1 = params.get('id'); // is the string "Jonathan Smith".
 // console.log(meetingID)
 
 let meetingID;
+let started = false
 
 
 let ydoc = new Y.Doc();
@@ -87,6 +88,7 @@ const Meeting = (data) => {
   }, []);
 
   let clearScreen = false;
+  let saveSnap = false;
 
 
   setTimeout(function () {
@@ -168,6 +170,7 @@ mesgMapp5 = proxy({});
     })
     bindProxyAndYMap(mesgMap, ymap);
   bindProxyAndYMap(mesgMapp5, ymapp5);
+  started = true;
 
 
   }, 2000);
@@ -198,7 +201,13 @@ mesgMapp5 = proxy({});
       clearScreen = false;
       console.log("cleared")
     }
+    
     if (p5.mouseIsPressed) {
+      if(saveSnap && started){
+        console.log("snapped")
+        saveSnap = false
+        p5.saveCanvas();
+      }
       count += 1
       var d = new Date();
       var n = d.toLocaleTimeString('en-US');
@@ -249,6 +258,13 @@ mesgMapp5 = proxy({});
 
   function clear(){
     clearScreen = true;
+  }
+
+  function saveS(){
+    if(started){
+      saveSnap = true;
+    }
+    
   }
 
 
@@ -331,8 +347,8 @@ mesgMapp5 = proxy({});
       <Row>
         <Col md={2}>
           <ButtonGroup vertical size="lg" style={{ width: "150px", marginTop: "75px" }}>
-            <Button variant="dark" onClick={clear} >Clear Screen</Button>
-            <Button variant="outline-dark" >Save file</Button>
+            <Button variant="dark" onClick={clear()} >Clear Screen</Button>
+            <Button variant="outline-dark" onClick={saveS()}>Save file</Button>
             <Button variant="outline-dark" >Upload file</Button>
           </ButtonGroup>
         </Col>
