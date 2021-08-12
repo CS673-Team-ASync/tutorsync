@@ -7,6 +7,7 @@ import SearchPage from '../SearchPage/SearchPage';
 import TutorSubjectsAndTimes from '../tutorSubjectsAndTimes/TutorSubjectsAndTimes';
 
 
+
 const ManageMeetings = () => {
 
     const [pastMeetings, setPastMeetings] = useState([]);
@@ -77,8 +78,8 @@ const ManageMeetings = () => {
                                         <h5 className="card-title">{userMeeting.meeting.title}</h5>
                                         <p className="card-text">{`${userMeeting.participant.firstName}  ${userMeeting.participant.lastName}`}</p>
 
-                            <Link to="../meeting">
-                            <a href="#" class="btn btn-primary">Join Meeting</a>
+                            <Link to={"../meeting?id="+userMeeting.meeting._id}>
+                            <a href={"../meeting?id="+userMeeting.meeting._id} class="btn btn-primary">Join Meeting</a>
                             </Link>
                             &nbsp;&nbsp;&nbsp;
                             <a href="#" className="btn btn-danger">Cancel</a>
