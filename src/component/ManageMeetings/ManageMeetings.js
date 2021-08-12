@@ -39,7 +39,7 @@ const ManageMeetings = () => {
                 </Link>
                 </Col>
 
-                <Col></Col>
+              
                 
                 <Col xs={6}>
                     <Link to="../">
@@ -75,7 +75,7 @@ const ManageMeetings = () => {
                         {upcomingMeetings.map(userMeeting => {
                                 return (
                                     <div key={userMeeting.meeting.title}>
-                                        <h5 className="card-title">{userMeeting.meeting.title}</h5>
+                                        <h5 className="card-title"><b>{userMeeting.meeting.title}</b></h5>
                                         <p className="card-text">{`${userMeeting.participant.firstName}  ${userMeeting.participant.lastName}`}</p>
 
                             <Link to={"../meeting?id="+userMeeting.meeting._id}>
@@ -83,6 +83,7 @@ const ManageMeetings = () => {
                             </Link>
                             &nbsp;&nbsp;&nbsp;
                             <a href="#" className="btn btn-danger">Cancel</a>
+                            <br></br><br></br>
                         </div>)
                         })}
                         </div>

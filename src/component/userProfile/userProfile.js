@@ -84,7 +84,7 @@ const UserProfile = () => {
       <h4><b>Active Subjects</b></h4>
       <ListGroup>
         {subjects.map(subject => {
-          return (<ListGroup.Item>{subject.subject}-{subject.description}</ListGroup.Item>)
+          return (<ListGroup.Item>{subject.subject} -- {subject.description}</ListGroup.Item>)
         })}
         </ListGroup>
       </Col>
@@ -94,6 +94,7 @@ const UserProfile = () => {
 <br></br>
 
 <Row>
+  
   <Link to="../">
    <a href="#" className="btn btn-primary">Search for Subjects</a>
    </Link>
